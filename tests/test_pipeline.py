@@ -269,6 +269,7 @@ class PipelineTests(unittest.TestCase):
             self.assertEqual(first, second)
             record = json.loads(first.read_text())
             self.assertEqual(len(record["forecasts"]), 96)
+            self.assertTrue((campaign / "campaign.json").is_file())
             self.assertEqual(len({row["origin_time_utc"] for row in record["forecasts"]}), 1)
             self.assertEqual(len({row["feature_values_sha256"] for row in record["forecasts"]}), 1)
             persistence = [row for row in record["forecasts"] if row["model_family"] == "PERSISTENCE"]

@@ -30,8 +30,8 @@ Trong GitHub repository, tạo Actions secret tên chính xác `OPENAQ_API_KEY` 
 `Settings → Secrets and variables → Actions`. Dùng cùng OpenAQ v3 key đang được lưu
 trong macOS Keychain; không tạo `.env` và không commit key.
 
-Chạy thủ công workflow `PM25 - deployment shadow forecast` một lần. Chỉ khi job tạo được
-forecast thì `data/shadow/deployment-shadow-v1/campaign.json` mới được tạo và đồng hồ bảy
+Chạy thủ công workflow `PM25 - deployment shadow forecast` một lần. Chỉ khi job tạo đủ
+toàn bộ 576 forecast rows thì `data/shadow/deployment-shadow-v1/campaign.json` mới được tạo và đồng hồ bảy
 ngày mới bắt đầu.
 
 ## 2. Tạo Cloudflare Worker trigger

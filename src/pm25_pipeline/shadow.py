@@ -530,7 +530,7 @@ def issue_shadow_forecasts(
         },
     )
     state = campaign_root / "campaign.json"
-    if forecasts and not state.exists():
+    if len(forecasts) == expected and not state.exists():
         end = issued_at + pd.Timedelta(days=int(config["duration_days"]))
         _atomic_json(
             state,
