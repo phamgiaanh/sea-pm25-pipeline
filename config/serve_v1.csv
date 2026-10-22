@@ -1,0 +1,2 @@
+serve_version,station_key,serve_status,model_run,feature_contract_version,audit_id,forecast_hours,max_observation_age_hours,selection_policy
+SERVE_V1,bangkok_1304207,pilot,gth10,v1.3,serve-v1-audit-20261022,24,6,"Passed live and historical-performance gates; highest RMSE skill among eligible stations after limiting SERVE_V1 to one target per city"

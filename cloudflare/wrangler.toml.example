@@ -1,0 +1,14 @@
+name = "sea-pm25-gth10-shadow-trigger"
+main = "src/index.js"
+compatibility_date = "2026-10-22"
+
+[triggers]
+crons = ["17 * * * *", "43 4 * * *"]
+
+[vars]
+GITHUB_OWNER = "REPLACE_WITH_GITHUB_OWNER"
+GITHUB_REPO = "REPLACE_WITH_PRIVATE_REPOSITORY_NAME"
+GITHUB_REF = "main"
+
+# Store the GitHub token only as an encrypted Worker secret:
+#   npx wrangler secret put GITHUB_TOKEN

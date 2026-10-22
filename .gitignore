@@ -1,0 +1,28 @@
+.DS_Store
+.env
+.venv/
+__pycache__/
+*.py[cod]
+
+# Reproducible outputs. Keep them outside normal Git history or use Git LFS.
+data/raw/*
+!data/raw/README.md
+data/processed/*
+!data/processed/README.md
+artifacts/*
+!artifacts/README.md
+!artifacts/gth10/
+artifacts/gth10/*
+!artifacts/gth10/models/
+!artifacts/gth10/models/*.txt
+!artifacts/gth10/fit_manifest.csv
+!artifacts/gth10/run_manifest.json
+
+# Live source payloads are uploaded as short-lived GitHub artifacts, not committed.
+runtime/
+
+# Cloudflare deployment state and secrets stay local.
+cloudflare/node_modules/
+cloudflare/.wrangler/
+cloudflare/wrangler.toml
+

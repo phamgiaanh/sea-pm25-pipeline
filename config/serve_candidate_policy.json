@@ -1,0 +1,12 @@
+{
+  "policy_version": "serve-candidate-v2",
+  "screening_horizons_hours": [1, 3, 6, 12, 24, 30],
+  "minimum_pooled_rmse_skill_pct": 0.0,
+  "minimum_winning_horizons": 5,
+  "minimum_worst_horizon_rmse_skill_pct": -2.0,
+  "minimum_rows_per_screening_horizon": 2160,
+  "ranking_metric": "pooled_rmse_skill_pct",
+  "maximum_targets_per_city": 1,
+  "shadow_monitoring_required": true,
+  "minimum_shadow_days": 7
+}

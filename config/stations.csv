@@ -1,0 +1,23 @@
+station_key,cohorts,country,city,station_name,provider,location_id,sensor_id,latitude,longitude,timezone,collect_from_utc,collect_to_utc,min_pm25,max_pm25
+hanoi_a,core3|core5|gth10|gsea15,Vietnam,Hanoi,Hanoi,AirNow,7441,21632,21.021939,105.818806,Asia/Ho_Chi_Minh,2017-01-01T00:00:00Z,2025-01-01T00:00:00Z,0,500
+bangkok_1304152,core3|core5|gth10|gsea15,Thailand,Bangkok,The Government Public Relations Department,Air4Thai,225650,1304152,13.783185,100.540489,Asia/Bangkok,2021-04-01T00:00:00Z,2025-01-01T00:00:00Z,0,500
+jakarta_airnow,core3|core5|gth10|gsea15,Indonesia,Jakarta,Jakarta Central,AirNow,8637,25072,-6.182536,106.834235,Asia/Jakarta,2017-01-01T00:00:00Z,2025-01-01T00:00:00Z,0,500
+vientiane,core5|gth10|gsea15,Laos,Vientiane,Vientiane,AirNow,8893,25947,17.896122,102.640000,Asia/Vientiane,2019-01-01T00:00:00Z,2025-01-01T00:00:00Z,0,500
+yangon,core5|gth10|gsea15,Myanmar,Yangon,Rangoon,AirNow,7153,21633,16.825600,96.144500,Asia/Yangon,2019-01-01T00:00:00Z,2025-01-01T00:00:00Z,0,500
+chiang_rai_1304242,gth10|thailand_new5|gsea15,Thailand,Chiang Rai,"Natural Resources and Environment Office, Chiangrai",Air4Thai,2328,1304242,19.909217,99.823467,Asia/Bangkok,2021-04-29T19:00:00Z,2025-01-01T00:00:00Z,0,500
+chiang_mai_1304220,gth10|thailand_new5|gsea15,Thailand,Chiang Mai,City Hall,Air4Thai,225669,1304220,18.840732,98.969780,Asia/Bangkok,2021-04-29T20:00:00Z,2025-01-01T00:00:00Z,0,500
+bangkok_1304205,gth10|thailand_new5|gsea15,Thailand,Bangkok,Highway District,Air4Thai,2167,1304205,13.7054879,100.315622,Asia/Bangkok,2021-04-29T19:00:00Z,2025-01-01T00:00:00Z,0,500
+bangkok_1304207,gth10|thailand_new5|gsea15,Thailand,Bangkok,Residence for Dept. of Mineral Resources,Air4Thai,906,1304207,13.652141,100.531805,Asia/Bangkok,2021-04-29T19:00:00Z,2025-01-01T00:00:00Z,0,500
+bangkok_1304255,gth10|thailand_new5|gsea15,Thailand,Bangkok,Sukhothai Thammathirat Open University,Air4Thai,701,1304255,13.907861,100.535641,Asia/Bangkok,2021-04-29T19:00:00Z,2025-01-01T00:00:00Z,0,500
+hanoi_nhan_chinh_13502151,serve_candidates_v2|serve_wave1,Vietnam,Hanoi,Công viên Nhân Chính - Khuất Duy Tiến,Hanoi Air Quality Monitoring Network,4946812,13502151,21.006818,105.805733,Asia/Ho_Chi_Minh,2025-07-03T15:40:00Z,2026-10-22T00:00:00Z,0,500
+hanoi_bach_mai_13502154,serve_candidates_v2|serve_wave1|gsea15|gsea15_new5,Vietnam,Hanoi,Số 1 đường Giải Phóng - phường Bạch Mai - ĐHBK,Hanoi Air Quality Monitoring Network,4946813,13502154,21.005763,105.843146,Asia/Ho_Chi_Minh,2025-07-03T15:40:00Z,2026-10-22T00:00:00Z,0,500
+hcmc_cmt8_11357424,serve_candidates_v2|serve_wave2|gsea15|gsea15_new5,Vietnam,Ho Chi Minh City,CMT8,AirGradient,3276359,11357424,10.7869,106.6668,Asia/Ho_Chi_Minh,2024-11-19T11:00:00Z,2026-10-22T00:00:00Z,0,500
+singapore_midwood_10444583,serve_candidates_v2|serve_wave1,Singapore,Singapore,Midwood,AirGradient,3040714,10444583,1.36,103.76,Asia/Singapore,2024-08-30T21:00:00Z,2026-10-22T00:00:00Z,0,500
+kuala_lumpur_ttdi_11760952,serve_candidates_v2|serve_wave2,Malaysia,Kuala Lumpur,Taman Tun Dr. Ismail,AirGradient,3331918,11760952,3.15,101.63,Asia/Kuala_Lumpur,2024-12-23T07:00:00Z,2026-10-22T00:00:00Z,0,500
+kuala_lumpur_setia_12178404,serve_candidates_v2|serve_wave2|gsea15|gsea15_new5,Malaysia,Kuala Lumpur,Setia Eco Park,AirGradient,3400978,12178404,3.112,101.46,Asia/Kuala_Lumpur,2025-02-11T18:00:00Z,2026-10-22T00:00:00Z,0,500
+manila_mandaluyong_12035571,serve_candidates_v2|serve_wave3,Philippines,Manila,Mandaluyong City,AirGradient,3370151,12035571,14.58,121.04,Asia/Manila,2025-01-16T00:05:21Z,2026-10-22T00:00:00Z,0,500
+jakarta_lab_lingkungan_17766208,serve_candidates_v2|serve_wave4,Indonesia,Jakarta,Lab. Lingkungan,AirGradient,6551316,17766208,-6.168547,106.789572,Asia/Jakarta,2026-09-29T07:00:00Z,2026-10-22T00:00:00Z,0,500
+vientiane_mahosot_13621709,serve_candidates_v2|serve_wave4,Laos,Vientiane,Mahosot Hospital,AirGradient,5103390,13621709,17.95944785330261,102.61366511686585,Asia/Vientiane,2025-07-17T05:00:00Z,2026-10-22T00:00:00Z,0,500
+vientiane_unicef_12714979,serve_candidates_v2|serve_wave4|gsea15|gsea15_new5,Laos,Vientiane,UNICEF Lao PDR CO,AirGradient,3998818,12714979,17.937650817948654,102.61723189596404,Asia/Vientiane,2025-04-08T07:00:00Z,2026-10-22T00:00:00Z,0,500
+yangon_airgradient_14198580,serve_candidates_v2|serve_wave4|gsea15|gsea15_new5,Myanmar,Yangon,Yangon,AirGradient,5894629,14198580,16.86421,96.14311,Asia/Yangon,2025-09-24T06:00:00Z,2026-10-22T00:00:00Z,0,500
+
