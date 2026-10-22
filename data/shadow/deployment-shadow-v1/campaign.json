@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "campaign_id": "deployment-shadow-v1",
+  "model_arms": [
+    {
+      "model_family": "GTH10_GLOBAL",
+      "kind": "global",
+      "model_run": "gth10"
+    },
+    {
+      "model_family": "GSEA15_GLOBAL",
+      "kind": "global",
+      "model_run": "gsea15/global15"
+    },
+    {
+      "model_family": "LOCAL_LIGHTGBM",
+      "kind": "local",
+      "station_runs": {
+        "bangkok_1304207": "local10",
+        "hanoi_bach_mai_13502154": "gsea15/local_target5",
+        "hcmc_cmt8_11357424": "gsea15/local_target5",
+        "kuala_lumpur_setia_12178404": "gsea15/local_target5",
+        "vientiane_unicef_12714979": "gsea15/local_target5",
+        "yangon_airgradient_14198580": "gsea15/local_target5"
+      }
+    },
+    {
+      "model_family": "PERSISTENCE",
+      "kind": "persistence",
+      "model_run": "persistence"
+    }
+  ],
+  "started_at_utc": "2026-10-22T16:58:21.374660Z",
+  "ends_at_utc": "2026-10-29T16:58:21.374660Z",
+  "duration_days": 7,
+  "started_by_run_token": "20261022T165821Z_39818493048_1"
+}
