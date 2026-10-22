@@ -89,12 +89,12 @@ def main() -> None:
     serve_v2.add_argument("--audit-id", required=True)
     serve_v2.add_argument("--zero-shot-report", required=True)
     serve_v2.add_argument("--proposal", required=True)
-    for name in ("shadow-issue", "shadow-score"):
+    for name in ("shadow-issue", "shadow-score", "shadow-report"):
         shadow = subparsers.add_parser(name)
         shadow.add_argument(
             "--config",
             type=Path,
-            default=Path("config/shadow_gth10.json"),
+            default=Path("config/shadow_deployment.json"),
             help="shadow campaign config relative to --root, or an absolute path",
         )
         shadow.add_argument(
@@ -301,15 +301,16 @@ def main() -> None:
             root / "config" / "serve_v1.csv",
             root / "config" / "serve_candidate_policy.json",
         )
-    elif args.command in {"shadow-issue", "shadow-score"}:
+    elif args.command in {"shadow-issue", "shadow-score", "shadow-report"}:
         from .shadow import (
             issue_shadow_forecasts,
             load_shadow_config,
+            report_shadow_campaign,
             score_shadow_forecasts,
         )
 
         api_key = os.environ.get("OPENAQ_API_KEY", "").strip()
-        if not api_key:
+        if args.command != "shadow-report" and not api_key:
             raise SystemExit("OPENAQ_API_KEY is required for shadow-live operation")
         shadow_config_path = args.config
         if not shadow_config_path.is_absolute():
@@ -331,7 +332,7 @@ def main() -> None:
                 output_root=output_root,
                 evidence_root=evidence_root,
             )
-        else:
+        elif args.command == "shadow-score":
             result = score_shadow_forecasts(
                 root,
                 stations,
@@ -340,6 +341,8 @@ def main() -> None:
                 output_root=output_root,
                 evidence_root=evidence_root,
             )
+        else:
+            result = report_shadow_campaign(root, shadow_config, output_root=output_root)
     else:
         from .compare import summarize_feature_screen
 

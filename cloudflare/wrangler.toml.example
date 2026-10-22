@@ -1,4 +1,4 @@
-name = "sea-pm25-gth10-shadow-trigger"
+name = "sea-pm25-deployment-shadow-trigger"
 main = "src/index.js"
 compatibility_date = "2026-10-22"
 

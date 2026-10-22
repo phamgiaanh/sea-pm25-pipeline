@@ -1,4 +1,4 @@
-# G-TH10 shadow-live — Cloudflare Cron + GitHub Actions
+# Deployment shadow-live — Cloudflare Cron + GitHub Actions
 
 Thiết kế này dùng Cloudflare Cron làm đồng hồ ổn định. Worker chỉ gọi GitHub
 `workflow_dispatch`; API key OpenAQ và model inference vẫn chạy trong private GitHub
@@ -6,13 +6,13 @@ repository. Không có secret nào được ghi vào source code hoặc forecast
 
 ## Phạm vi chiến dịch
 
-- Model: `gth10`, 30 LightGBM models cho h1–h30, feature contract `v1.3`.
+- Arms: frozen `gth10`, `gsea15/global15`, Local LightGBM theo station và Persistence; feature contract `v1.3`.
 - Forecast output: 24 thời điểm tương lai kể từ lúc issue; model lead tự dịch theo độ
   trễ của quan sát PM2.5 gần nhất.
 - Shadow stations: Bangkok SERVE_V1 cùng Bạch Mai, HCMC CMT8, Kuala Lumpur Setia,
   Vientiane UNICEF và Yangon AirGradient.
 - Thời lượng: 7 ngày kể từ lần issue thành công đầu tiên; scoring tiếp tục thêm 4 ngày.
-- Forecast ledger là append-only trong `data/shadow/gth10-shadow-v1/runs/`.
+- Forecast và observation ledger là append-only trong `data/shadow/deployment-shadow-v1/`.
 
 ## 1. Đưa repo sạch lên GitHub
 
@@ -21,8 +21,7 @@ có mặt trên GitHub:
 
 - `.github/workflows/shadow-forecast.yml`
 - `.github/workflows/shadow-score.yml`
-- `artifacts/gth10/models/h01.txt` … `h30.txt`
-- `artifacts/gth10/run_manifest.json` và `fit_manifest.csv`
+- Các bundle được allowlist trong `.gitignore`: G-TH10, G-SEA15 global, Local Target5 và Local10 Bangkok.
 
 Model bundle khoảng 9 MB và đã được `.gitignore` cho phép track có chủ đích. Các
 artifacts nghiên cứu khác vẫn bị ignore.
@@ -31,8 +30,8 @@ Trong GitHub repository, tạo Actions secret tên chính xác `OPENAQ_API_KEY` 
 `Settings → Secrets and variables → Actions`. Dùng cùng OpenAQ v3 key đang được lưu
 trong macOS Keychain; không tạo `.env` và không commit key.
 
-Chạy thủ công workflow `PM25 - G-TH10 shadow forecast` một lần. Chỉ khi job tạo được
-forecast thì `data/shadow/gth10-shadow-v1/campaign.json` mới được tạo và đồng hồ bảy
+Chạy thủ công workflow `PM25 - deployment shadow forecast` một lần. Chỉ khi job tạo được
+forecast thì `data/shadow/deployment-shadow-v1/campaign.json` mới được tạo và đồng hồ bảy
 ngày mới bắt đầu.
 
 ## 2. Tạo Cloudflare Worker trigger
@@ -69,18 +68,17 @@ ledger cùng lúc.
 
 Một run forecast thành công phải có:
 
-- `latest_run.json` báo `forecast_count = 144`;
-- sáu status `FORECAST_ISSUED`;
+- `latest_run.json` báo tối đa `forecast_count = 576`;
+- status theo từng station/model arm;
 - mỗi forecast có `origin_time_utc`, `issued_at_utc`, `valid_at_utc`,
-  `observation_age_hours`, `model_horizon`, dự báo G-TH10 và persistence;
+  `observation_age_hours`, `horizon`, `model_family`, `model_run` và `feature_values_sha256`;
 - source responses nằm trong GitHub Actions artifact, không nằm trong Git history.
 
 Sau khi target đã trôi qua 12 giờ, workflow scoring ghi:
 
-- `metrics/latest_global.csv`;
-- `metrics/latest_by_station.csv`;
-- `metrics/latest_by_station_horizon.csv`;
-- `metrics/latest_summary.json`.
+- append-only exact-time observation ledgers;
+- `artifacts/shadow/deployment-shadow-v1/REPORT.md`;
+- metrics theo station, horizon, ngày và paired model comparisons.
 
 Chỉ so khớp observation có đúng `sensor_id` và đúng interval-end UTC. Không nội suy
 ground truth. Các forecast issue theo giờ bị chồng lấn, vì vậy không được coi từng sai

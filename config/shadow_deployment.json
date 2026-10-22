@@ -1,0 +1,34 @@
+{
+  "campaign_id": "deployment-shadow-v1",
+  "feature_contract_version": "v1.3",
+  "station_keys": [
+    "bangkok_1304207",
+    "hanoi_bach_mai_13502154",
+    "hcmc_cmt8_11357424",
+    "kuala_lumpur_setia_12178404",
+    "vientiane_unicef_12714979",
+    "yangon_airgradient_14198580"
+  ],
+  "model_arms": [
+    {"model_family": "GTH10_GLOBAL", "kind": "global", "model_run": "gth10"},
+    {"model_family": "GSEA15_GLOBAL", "kind": "global", "model_run": "gsea15/global15"},
+    {
+      "model_family": "LOCAL_LIGHTGBM",
+      "kind": "local",
+      "station_runs": {
+        "bangkok_1304207": "local10",
+        "hanoi_bach_mai_13502154": "gsea15/local_target5",
+        "hcmc_cmt8_11357424": "gsea15/local_target5",
+        "kuala_lumpur_setia_12178404": "gsea15/local_target5",
+        "vientiane_unicef_12714979": "gsea15/local_target5",
+        "yangon_airgradient_14198580": "gsea15/local_target5"
+      }
+    },
+    {"model_family": "PERSISTENCE", "kind": "persistence", "model_run": "persistence"}
+  ],
+  "screening_horizons": [1, 3, 6, 12, 24, 30],
+  "duration_days": 7,
+  "scoring_grace_hours": 12,
+  "scoring_tail_days": 4,
+  "selection_note": "Deployment-oriented shadow comparison only. No arm or station is promoted automatically."
+}

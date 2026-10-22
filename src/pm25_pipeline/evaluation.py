@@ -736,6 +736,10 @@ def evaluate_gsea15(
         for label, frame in frames.items():
             indexed[label] = _metric_values(frame.loc[frame["station_key"].eq(station_key)])
         persistence_rmse = float(indexed["PERSISTENCE"]["rmse"])
+        champion_label = min(
+            ("GTH10_INCUMBENT", "GSEA15_GLOBAL", "LOCAL_TARGET5", "PERSISTENCE"),
+            key=lambda label: float(indexed[label]["rmse"]),
+        )
         station_rows.append(
             {
                 "station_key": station_key,
@@ -745,6 +749,8 @@ def evaluate_gsea15(
                 "gsea15_rmse": indexed["GSEA15_GLOBAL"]["rmse"],
                 "local_rmse": indexed["LOCAL_TARGET5"]["rmse"],
                 "persistence_rmse": persistence_rmse,
+                "offline_champion": champion_label,
+                "offline_champion_rmse": indexed[champion_label]["rmse"],
                 "gsea15_vs_gth10_pct": 100
                 * (indexed["GSEA15_GLOBAL"]["rmse"] - indexed["GTH10_INCUMBENT"]["rmse"])
                 / indexed["GTH10_INCUMBENT"]["rmse"],
@@ -767,6 +773,9 @@ def evaluate_gsea15(
     gsea_skill = 100 * (
         pooled.loc["PERSISTENCE", "rmse"] - pooled.loc["GSEA15_GLOBAL", "rmse"]
     ) / pooled.loc["PERSISTENCE", "rmse"]
+    local_vs_gsea = 100 * (
+        pooled.loc["LOCAL_TARGET5", "rmse"] - pooled.loc["GSEA15_GLOBAL", "rmse"]
+    ) / pooled.loc["GSEA15_GLOBAL", "rmse"]
 
     output_dir = artifacts_root / "evaluations" / report_name
     output_dir.mkdir(parents=True, exist_ok=False)
@@ -785,8 +794,8 @@ def evaluate_gsea15(
     comparisons.to_csv(paths["comparisons"], index=False, float_format="%.10g")
     table_rows = [
         f"| `{row.station_key}` | {row.city} | {row.gth10_rmse:.3f} | "
-        f"{row.gsea15_rmse:.3f} | {row.gsea15_vs_gth10_pct:+.1f}% | "
-        f"{row.gsea15_skill_vs_persistence_pct:+.1f}% |"
+        f"{row.gsea15_rmse:.3f} | {row.local_rmse:.3f} | {row.persistence_rmse:.3f} | "
+        f"{row.offline_champion} |"
         for row in station_summary.itertuples(index=False)
     ]
     report_lines = [
@@ -803,16 +812,17 @@ def evaluate_gsea15(
         f"- Frozen G-TH10 incumbent RMSE: `{pooled.loc['GTH10_INCUMBENT', 'rmse']:.3f}`",
         f"- G-SEA15 RMSE: `{pooled.loc['GSEA15_GLOBAL', 'rmse']:.3f}` ({gsea_vs_baseline:+.1f}% versus G-TH10; negative is better)",
         f"- Persistence RMSE: `{pooled.loc['PERSISTENCE', 'rmse']:.3f}` (G-SEA15 skill `{gsea_skill:+.1f}%`)",
+        f"- Local-target pooled RMSE: `{pooled.loc['LOCAL_TARGET5', 'rmse']:.3f}` (`{local_vs_gsea:+.1f}%` versus G-SEA15; positive is worse)",
         f"- G-SEA15 beats G-TH10 at `{baseline_wins}/{len(selected_horizons)}` screening horizons.",
         f"- G-SEA15 beats Persistence at `{persistence_wins}/{len(selected_horizons)}` screening horizons.",
         "",
         "## Station detail",
         "",
-        "| Station | City | G-TH10 RMSE | G-SEA15 RMSE | Change vs G-TH10 | Skill vs persistence |",
-        "|---|---|---:|---:|---:|---:|",
+        "| Station | City | G-TH10 | G-SEA15 | Local | Persistence | Offline champion |",
+        "|---|---|---:|---:|---:|---:|---|",
         *table_rows,
         "",
-        "This offline report does not promote a deployment model. Promotion requires the separate shadow-live comparison on observations arriving after the frozen test cutoff.",
+        "`offline_champion` is the lowest-RMSE candidate on the frozen pre-shadow test window. It is a station-specific shadow candidate, not an automatic deployment choice. Promotion requires the separate shadow-live comparison on observations arriving after the frozen test cutoff.",
         "",
     ]
     paths["report"].write_text("\n".join(report_lines), encoding="utf-8")

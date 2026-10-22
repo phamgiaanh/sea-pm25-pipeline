@@ -1,4 +1,4 @@
-name: PM25 - G-TH10 shadow forecast
+name: PM25 - deployment shadow forecast
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: pm25-gth10-shadow-ledger
+  group: pm25-deployment-shadow-ledger
   cancel-in-progress: false
 
 jobs:
@@ -39,17 +39,17 @@ jobs:
         if: steps.gate.outputs.enabled == 'true'
         run: PYTHONPATH=src python -m unittest discover -s tests -v
 
-      - name: Issue G-TH10 shadow forecasts
+      - name: Issue deployment shadow forecasts
         if: steps.gate.outputs.enabled == 'true'
         env:
           OPENAQ_API_KEY: ${{ secrets.OPENAQ_API_KEY }}
-        run: PYTHONPATH=src python -m pm25_pipeline shadow-issue --config config/shadow_gth10.json
+        run: PYTHONPATH=src python -m pm25_pipeline shadow-issue --config config/shadow_deployment.json
 
       - name: Upload source responses for audit
         if: always() && steps.gate.outputs.enabled == 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: gth10-shadow-source-${{ github.run_id }}-${{ github.run_attempt }}
+          name: deployment-shadow-source-${{ github.run_id }}-${{ github.run_attempt }}
           path: runtime/shadow_evidence/
           if-no-files-found: ignore
           retention-days: 14
@@ -64,7 +64,7 @@ jobs:
           if git diff --cached --quiet; then
             echo 'No new shadow ledger entries.'
           else
-            git commit -m 'data: preserve G-TH10 shadow forecast evidence'
+            git commit -m 'data: preserve deployment shadow forecast evidence'
             git pull --rebase origin "$GITHUB_REF_NAME"
             git push origin "HEAD:$GITHUB_REF_NAME"
           fi

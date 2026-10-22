@@ -11,7 +11,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CONFIG = ROOT / "config" / "shadow_gth10.json"
+CONFIG = ROOT / "config" / "shadow_deployment.json"
 
 
 def _load() -> tuple[dict, Path]:
@@ -54,7 +54,7 @@ def gate(mode: str, now: datetime) -> tuple[bool, str]:
     if now >= cutoff:
         return False, f"window_ended_at_{cutoff.isoformat()}"
     if mode == "forecast":
-        expected = len(config["station_keys"]) * 24
+        expected = len(config["station_keys"]) * len(config["model_arms"]) * 24
         if _full_issue_in_hour(campaign_root, now, expected):
             return False, "complete_issue_already_exists_in_this_utc_hour"
     return True, f"window_open_until_{cutoff.isoformat()}"

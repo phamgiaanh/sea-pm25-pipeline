@@ -1,5 +1,5 @@
 {
-  "name": "sea-pm25-gth10-shadow-trigger",
+  "name": "sea-pm25-deployment-shadow-trigger",
   "private": true,
   "scripts": {
     "deploy": "wrangler deploy",

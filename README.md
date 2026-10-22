@@ -151,6 +151,13 @@ while earlier immutable G-TH10 snapshots remain reproducible. Offline success
 does not promote a model: G-SEA15 must still beat the incumbent during the
 separate post-cutoff shadow-live period before deployment.
 
+Raw snapshots and model-run directories are immutable. The default `v1` names
+are intended for the first reproduction only. A deliberate second experiment
+must use new values such as `GSEA15_GLOBAL_RUN=gsea15/global15-v2`,
+`GSEA15_LOCAL_RUN=gsea15/local-target5-v2`,
+`GSEA15_BASELINE_RUN=gsea15/gth10-incumbent-v2` and
+`GSEA15_REPORT=gsea15-v2`; the pipeline refuses to overwrite an existing run.
+
 ## Inputs and outputs
 
 - `config/stations.csv`: the only station/cohort registry used by code.
@@ -261,21 +268,23 @@ existing SERVE_V1 target forward and selects at most one passing shadow target
 per new city, ranked by pooled RMSE skill. Promotion remains a separate decision
 after the required shadow period.
 
-### G-TH10 shadow-live
+### Deployment shadow-live
 
-The deployment-oriented campaign runs the frozen G-TH10 model on Bangkok and
-the five selected new-city shadow candidates. Cloudflare Cron dispatches two
-manual-only GitHub Actions workflows: hourly forecast issuance and daily
-delayed-observation scoring.
+The deployment-oriented campaign compares frozen G-TH10, G-SEA15, station-local
+LightGBM and Persistence on Bangkok plus five new-city candidates. Every arm in
+a station-cycle shares one origin and one feature vector. Cloudflare Cron
+dispatches hourly forecast issuance and daily exact-time observation scoring.
 
 For a local run with `OPENAQ_API_KEY` already available:
 
 ```bash
 make shadow-issue
 make shadow-score
+make shadow-report
 ```
 
-Forecasts are append-only under `data/shadow/gth10-shadow-v1/`; original
+Forecast and observation ledgers are append-only under
+`data/shadow/deployment-shadow-v1/`; original
 provider responses go to ignored `runtime/shadow_evidence/`. The campaign does
 not change the active serving registry. See `SHADOW_LIVE_SETUP_VI.md` for the
 private GitHub repository and Cloudflare Worker setup.

@@ -6,6 +6,7 @@ import tempfile
 import unittest
 from dataclasses import replace
 from pathlib import Path
+from unittest.mock import patch
 
 import numpy as np
 import pandas as pd
@@ -48,9 +49,12 @@ from pm25_pipeline.zero_shot import (
 )
 from pm25_pipeline.serve_selection import propose_serve_v2
 from pm25_pipeline.shadow import (
+    _model_bundle,
     _pm25_feature_row,
     _weather_feature_row,
+    issue_shadow_forecasts,
     load_shadow_config,
+    report_shadow_campaign,
     score_shadow_forecasts,
 )
 
@@ -122,10 +126,13 @@ def _iso_test(value: pd.Timestamp) -> str:
 class PipelineTests(unittest.TestCase):
     def test_shadow_config_is_fixed_to_the_deployment_candidates(self):
         config_dir = Path(__file__).resolve().parents[1] / "config"
-        config = load_shadow_config(config_dir / "shadow_gth10.json")
-        self.assertEqual(config["model_run"], "gth10")
+        config = load_shadow_config(config_dir / "shadow_deployment.json")
         self.assertEqual(config["feature_contract_version"], "v1.3")
         self.assertEqual(config["duration_days"], 7)
+        self.assertEqual(
+            [arm["model_family"] for arm in config["model_arms"]],
+            ["GTH10_GLOBAL", "GSEA15_GLOBAL", "LOCAL_LIGHTGBM", "PERSISTENCE"],
+        )
         self.assertEqual(
             config["station_keys"],
             [
@@ -198,12 +205,106 @@ class PipelineTests(unittest.TestCase):
         self.assertAlmostEqual(row["wind_speed_cos_dir"], 0.0, places=12)
         self.assertAlmostEqual(row["wind_speed_sin_dir"], 2.0, places=12)
 
+    def test_shadow_issue_shares_input_and_persistence_and_is_idempotent(self):
+        now = pd.Timestamp("2026-10-22T12:00:00Z")
+        experiment = {
+            **FEATURE_CONFIG,
+            "lags_hours": [0, 1, 2, 3, 6, 12, 24, 168],
+            "rolling_hours": [3, 6, 12, 24],
+            "horizons_hours": list(range(1, 31)),
+        }
+        columns = feature_columns(experiment)
+        config = {
+            "campaign_id": "test-multi-shadow",
+            "feature_contract_version": "v1.3",
+            "station_keys": [STATION.station_key],
+            "model_arms": [
+                {"model_family": "GTH10_GLOBAL", "kind": "global", "model_run": "gth10"},
+                {"model_family": "GSEA15_GLOBAL", "kind": "global", "model_run": "gsea15"},
+                {"model_family": "LOCAL_LIGHTGBM", "kind": "local", "station_runs": {STATION.station_key: "local"}},
+                {"model_family": "PERSISTENCE", "kind": "persistence", "model_run": "persistence"},
+            ],
+            "screening_horizons": [1, 3, 6, 12, 24, 30],
+            "duration_days": 7,
+            "scoring_grace_hours": 12,
+            "scoring_tail_days": 4,
+        }
+        pm25_results = []
+        for offset in range(336):
+            end = now - pd.Timedelta(offset + 1, unit="h")
+            pm25_results.append(item(_iso_test(end - pd.Timedelta(hours=1)), _iso_test(end), 20 + offset % 5))
+        anchor = now - pd.Timedelta(hours=1)
+        weather = {
+            "elevation": 42.0,
+            "hourly_units": {
+                "temperature_2m": "°C", "relative_humidity_2m": "%", "dew_point_2m": "°C",
+                "wind_speed_10m": "m/s", "wind_direction_10m": "°", "precipitation": "mm",
+                "surface_pressure": "hPa",
+            },
+            "hourly": {
+                "time": [anchor.strftime("%Y-%m-%dT%H:%M")],
+                "temperature_2m": [25.0], "relative_humidity_2m": [80.0], "dew_point_2m": [21.0],
+                "wind_speed_10m": [2.0], "wind_direction_10m": [90.0], "precipitation": [0.0],
+                "surface_pressure": [1008.0],
+            },
+        }
+
+        class FakeModel:
+            def predict(self, _frame, num_threads=1):
+                return [31.0]
+
+        bundle = ({"feature_columns": columns, "feature_contract_version": "v1.3"}, {h: FakeModel() for h in range(1, 31)}, "model-v1")
+        with tempfile.TemporaryDirectory() as directory, patch("pm25_pipeline.shadow._model_bundle", return_value=bundle):
+            root = Path(directory)
+            campaign = root / "campaign"
+            kwargs = dict(
+                output_root=campaign,
+                evidence_root=root / "evidence",
+                now=now,
+                request_openaq=lambda _url: {"results": pm25_results},
+                request_weather=lambda _url: weather,
+            )
+            first = issue_shadow_forecasts(root, [STATION], experiment, config, "unused", **kwargs)
+            second = issue_shadow_forecasts(root, [STATION], experiment, config, "unused", **kwargs)
+            self.assertEqual(first, second)
+            record = json.loads(first.read_text())
+            self.assertEqual(len(record["forecasts"]), 96)
+            self.assertEqual(len({row["origin_time_utc"] for row in record["forecasts"]}), 1)
+            self.assertEqual(len({row["feature_values_sha256"] for row in record["forecasts"]}), 1)
+            persistence = [row for row in record["forecasts"] if row["model_family"] == "PERSISTENCE"]
+            self.assertEqual({row["prediction"] for row in persistence}, {20.0})
+
+    def test_shadow_model_bundle_rejects_hash_mismatch_before_inference(self):
+        experiment = {
+            **FEATURE_CONFIG,
+            "lags_hours": [0], "rolling_hours": [3], "horizons_hours": [1],
+        }
+        columns = feature_columns(experiment)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            run = root / "artifacts" / "bad"
+            (run / "models").mkdir(parents=True)
+            (run / "run_manifest.json").write_text(json.dumps({
+                "feature_contract_version": "v1.3", "feature_set": "pm25_weather_calendar_altitude",
+                "feature_columns": columns, "horizons": [1],
+            }))
+            (run / "fit_manifest.csv").write_text("horizon,model_sha256\n1,incorrect\n")
+            (run / "models" / "h01.txt").write_text("not-a-model")
+            with self.assertRaisesRegex(RuntimeError, "hash mismatch"):
+                _model_bundle(root, "bad", experiment, "v1.3")
+
     def test_shadow_scoring_uses_exact_interval_end_truth(self):
         config = {
             "campaign_id": "test-shadow",
-            "model_run": "test-model",
             "feature_contract_version": "v1.3",
             "station_keys": [STATION.station_key],
+            "model_arms": [
+                {"model_family": "GTH10_GLOBAL", "kind": "global", "model_run": "test-model"},
+                {"model_family": "GSEA15_GLOBAL", "kind": "global", "model_run": "test-model-2"},
+                {"model_family": "LOCAL_LIGHTGBM", "kind": "local", "station_runs": {STATION.station_key: "test-local"}},
+                {"model_family": "PERSISTENCE", "kind": "persistence", "model_run": "persistence"},
+            ],
+            "screening_horizons": [1],
             "duration_days": 7,
             "scoring_grace_hours": 12,
             "scoring_tail_days": 4,
@@ -229,10 +330,17 @@ class PipelineTests(unittest.TestCase):
                                 "country": STATION.country,
                                 "city": STATION.city,
                                 "sensor_id": STATION.sensor_id,
-                                "valid_at_utc": "2026-10-21T01:00:00Z",
-                                "model_horizon": 1,
-                                "prediction_pm25_ug_m3": 12.0,
-                                "persistence_pm25_ug_m3": 10.0,
+                                "model_family": "GTH10_GLOBAL",
+                                "model_run": "test-model",
+                                "model_version": "test-v1",
+                                "feature_contract_version": "v1.3",
+                                "feature_values_sha256": "same-features",
+                                "origin_time_utc": "2026-10-21T00:00:00Z",
+                                "issued_at_utc": "2026-10-21T00:00:00Z",
+                                "observation_age_hours": 0.0,
+                                "horizon": 1,
+                                "target_time_utc": "2026-10-21T01:00:00Z",
+                                "prediction": 12.0,
                             }
                         ],
                     }
@@ -262,9 +370,12 @@ class PipelineTests(unittest.TestCase):
             self.assertEqual(result["evaluated"], 1)
             self.assertEqual(result["pending"], 0)
             self.assertEqual(result["unmatched_after_grace"], 0)
-            self.assertEqual(result["global_rmse"], 1.0)
-            self.assertEqual(result["global_persistence_rmse"], 1.0)
-            self.assertEqual(result["global_rmse_skill_pct"], 0.0)
+            by_model = pd.read_csv(campaign / "metrics" / "latest_by_model.csv")
+            self.assertEqual(by_model.iloc[0]["rmse"], 1.0)
+            observation_ledgers = list((campaign / "observations" / "runs").rglob("*.json"))
+            self.assertEqual(len(observation_ledgers), 1)
+            report = report_shadow_campaign(root, config, output_root=campaign)
+            self.assertTrue(report.is_file())
 
     def test_live_readiness_gates_complete_recent_station(self):
         now = pd.Timestamp("2026-10-22T12:00:00Z")
@@ -799,6 +910,17 @@ class PipelineTests(unittest.TestCase):
                 [smoke_station], experiment, snapshot, processed, root / "artifacts", "smoke", "core5", "core5"
             )
             self.assertTrue((run_dir / "models" / "h01.txt").is_file())
+            with self.assertRaises(FileExistsError):
+                train_run(
+                    [smoke_station],
+                    experiment,
+                    snapshot,
+                    processed,
+                    root / "artifacts",
+                    "smoke",
+                    "core5",
+                    "core5",
+                )
             metrics = pd.read_csv(run_dir / "metrics.csv")
             self.assertEqual(set(metrics["model"]), {"PERSISTENCE", "LIGHTGBM_GLOBAL"})
             self.assertTrue(metrics[["rmse", "mae", "bias"]].notna().all().all())
@@ -1089,6 +1211,7 @@ class PipelineTests(unittest.TestCase):
             station_summary = pd.read_csv(report.parent / "station_summary.csv")
             self.assertEqual(station_summary.iloc[0]["gth10_rmse"], 2.0)
             self.assertEqual(station_summary.iloc[0]["gsea15_rmse"], 1.0)
+            self.assertEqual(station_summary.iloc[0]["offline_champion"], "LOCAL_TARGET5")
             self.assertAlmostEqual(
                 station_summary.iloc[0]["gsea15_skill_vs_persistence_pct"],
                 100 * (3.0 - 1.0) / 3.0,

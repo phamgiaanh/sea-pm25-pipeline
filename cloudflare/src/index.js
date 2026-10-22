@@ -40,7 +40,7 @@ export default {
 
   async fetch() {
     return Response.json({
-      service: "sea-pm25-gth10-shadow-trigger",
+      service: "sea-pm25-deployment-shadow-trigger",
       status: "ok",
       schedules_utc: Object.keys(WORKFLOW_BY_CRON),
     });

@@ -18,7 +18,7 @@ GSEA15_LOCAL_RUN ?= gsea15/local_target5
 GSEA15_REPORT ?= gsea15-v1
 PYTHONPATH := src
 
-.PHONY: collect collect-weather data weather-data features export-csv screen-features train local reproduce reproduce-gth10 report-gth10 collect-gsea15 prepare-gsea15 train-gsea15 report-gsea15 reproduce-gsea15 audit-live evaluate-serve-v1 prepare-serve-candidates evaluate-serve-candidates-v2 audit-serve-candidates-v2 propose-serve-v2 shadow-issue shadow-score test
+.PHONY: collect collect-weather data weather-data features export-csv screen-features train local reproduce reproduce-gth10 report-gth10 collect-gsea15 prepare-gsea15 train-gsea15 report-gsea15 reproduce-gsea15 audit-live evaluate-serve-v1 prepare-serve-candidates evaluate-serve-candidates-v2 audit-serve-candidates-v2 propose-serve-v2 shadow-issue shadow-score shadow-report test
 
 collect:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pm25_pipeline collect --snapshot $(SNAPSHOT) --cohort $(COHORT)
@@ -109,10 +109,13 @@ propose-serve-v2:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pm25_pipeline propose-serve-v2 --audit-id $(SERVE_V2_AUDIT) --zero-shot-report $(ZERO_SHOT_REPORT) --proposal $(SERVE_V2_PROPOSAL)
 
 shadow-issue:
-	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pm25_pipeline shadow-issue --config config/shadow_gth10.json
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pm25_pipeline shadow-issue --config config/shadow_deployment.json
 
 shadow-score:
-	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pm25_pipeline shadow-score --config config/shadow_gth10.json
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pm25_pipeline shadow-score --config config/shadow_deployment.json
+
+shadow-report:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pm25_pipeline shadow-report --config config/shadow_deployment.json
 
 test:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m unittest discover -s tests -v

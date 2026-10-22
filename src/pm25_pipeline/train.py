@@ -139,6 +139,8 @@ def train_run(
     if unknown_horizons:
         raise ValueError(f"requested horizons are not configured: {sorted(unknown_horizons)}")
     output_dir = artifacts_root / run
+    if output_dir.exists():
+        raise FileExistsError(f"training run already exists: {output_dir}")
     model_dir = output_dir / "models"
     model_dir.mkdir(parents=True, exist_ok=True)
     metrics: list[dict] = []
@@ -222,7 +224,10 @@ def train_run(
         "pandas": pd.__version__,
         "numpy": np.__version__,
         "lightgbm": lgb.__version__,
-        "test_reuse_warning": "The 2024 window has already informed project decisions; treat it as a historical benchmark, not a pristine final test.",
+        "test_reuse_warning": experiment.get(
+            "evaluation_note",
+            "The 2024 window has already informed project decisions; treat it as a historical benchmark, not a pristine final test.",
+        ),
     }
     (output_dir / "run_manifest.json").write_text(
         json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
@@ -265,6 +270,8 @@ def train_local_run(
     if unknown_horizons:
         raise ValueError(f"requested horizons are not configured: {sorted(unknown_horizons)}")
     output_dir = artifacts_root / run
+    if output_dir.exists():
+        raise FileExistsError(f"local training run already exists: {output_dir}")
     model_dir = output_dir / "models"
     model_dir.mkdir(parents=True, exist_ok=True)
     config = experiment["lightgbm"]
@@ -375,7 +382,10 @@ def train_local_run(
         "pandas": pd.__version__,
         "numpy": np.__version__,
         "lightgbm": lgb.__version__,
-        "test_reuse_warning": "The 2024 window has already informed project decisions; treat it as a historical benchmark, not a pristine final test.",
+        "test_reuse_warning": experiment.get(
+            "evaluation_note",
+            "The 2024 window has already informed project decisions; treat it as a historical benchmark, not a pristine final test.",
+        ),
     }
     (output_dir / "run_manifest.json").write_text(
         json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"

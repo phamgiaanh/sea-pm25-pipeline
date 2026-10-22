@@ -17,6 +17,31 @@ artifacts/gth10/*
 !artifacts/gth10/models/*.txt
 !artifacts/gth10/fit_manifest.csv
 !artifacts/gth10/run_manifest.json
+!artifacts/gsea15/
+artifacts/gsea15/*
+!artifacts/gsea15/global15/
+artifacts/gsea15/global15/*
+!artifacts/gsea15/global15/models/
+!artifacts/gsea15/global15/models/*.txt
+!artifacts/gsea15/global15/fit_manifest.csv
+!artifacts/gsea15/global15/run_manifest.json
+!artifacts/gsea15/local_target5/
+artifacts/gsea15/local_target5/*
+!artifacts/gsea15/local_target5/models/
+!artifacts/gsea15/local_target5/models/*/
+!artifacts/gsea15/local_target5/models/*/*.txt
+!artifacts/gsea15/local_target5/fit_manifest.csv
+!artifacts/gsea15/local_target5/run_manifest.json
+!artifacts/local10/
+artifacts/local10/*
+!artifacts/local10/models/
+artifacts/local10/models/*
+!artifacts/local10/models/bangkok_1304207/
+!artifacts/local10/models/bangkok_1304207/*.txt
+!artifacts/local10/fit_manifest.csv
+!artifacts/local10/run_manifest.json
+!artifacts/shadow/
+!artifacts/shadow/**
 
 # Live source payloads are uploaded as short-lived GitHub artifacts, not committed.
 runtime/
