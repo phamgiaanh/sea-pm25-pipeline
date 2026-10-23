@@ -1,0 +1,6 @@
+model_family,model_run,total_forecasts,evaluated,pending,unmatched_after_grace,rmse,mae,bias,truth_coverage_pct
+GSEA15_GLOBAL,gsea15/global15,1803,0,1803,0,,,,0
+GTH10_GLOBAL,gth10,1803,0,1803,0,,,,0
+LOCAL_LIGHTGBM,gsea15/local_target5,1491,0,1491,0,,,,0
+LOCAL_LIGHTGBM,local10,312,0,312,0,,,,0
+PERSISTENCE,persistence,1803,0,1803,0,,,,0

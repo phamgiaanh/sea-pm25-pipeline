@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "campaign_id": "deployment-shadow-v1",
+  "model_arms": [
+    {
+      "model_family": "GTH10_GLOBAL",
+      "kind": "global",
+      "model_run": "gth10"
+    },
+    {
+      "model_family": "GSEA15_GLOBAL",
+      "kind": "global",
+      "model_run": "gsea15/global15"
+    },
+    {
+      "model_family": "LOCAL_LIGHTGBM",
+      "kind": "local",
+      "station_runs": {
+        "bangkok_1304207": "local10",
+        "hanoi_bach_mai_13502154": "gsea15/local_target5",
+        "hcmc_cmt8_11357424": "gsea15/local_target5",
+        "kuala_lumpur_setia_12178404": "gsea15/local_target5",
+        "vientiane_unicef_12714979": "gsea15/local_target5",
+        "yangon_airgradient_14198580": "gsea15/local_target5"
+      }
+    },
+    {
+      "model_family": "PERSISTENCE",
+      "kind": "persistence",
+      "model_run": "persistence"
+    }
+  ],
+  "generated_at_utc": "2026-10-23T04:44:09.270876Z",
+  "runs_considered": 13,
+  "forecasts_considered": 7212,
+  "station_attempts": 312,
+  "station_successes": 312,
+  "issuance_arm_coverage": 1.0,
+  "evaluated": 0,
+  "pending": 7212,
+  "unmatched_after_grace": 0,
+  "scoring_grace_hours": 12,
+  "ground_truth_source": "exact OpenAQ sensor one-hour interval-end match; no interpolation",
+  "independence_note": "Hourly issues overlap; individual forecast errors are not independent samples.",
+  "source_evidence": [],
+  "fetch_errors": {},
+  "outputs": {
+    "latest_by_model.csv": "fa8d85071d803613b8762e76ed3fccaf89c6380f3aed767066a353f289649e79",
+    "latest_by_station.csv": "0d65e5133817915a7c46bb12c1dd865791721e6226d151f7bd80cce30fc97b08",
+    "latest_by_station_horizon.csv": "7a947291478783ca5297185e8f4345c89c91a1e44f64bfbac00a5d911b4ddf12"
+  }
+}

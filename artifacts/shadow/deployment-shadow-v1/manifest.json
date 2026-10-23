@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "campaign_id": "deployment-shadow-v1",
+  "feature_contract_version": "v1.3",
+  "model_arms": [
+    {
+      "model_family": "GTH10_GLOBAL",
+      "kind": "global",
+      "model_run": "gth10"
+    },
+    {
+      "model_family": "GSEA15_GLOBAL",
+      "kind": "global",
+      "model_run": "gsea15/global15"
+    },
+    {
+      "model_family": "LOCAL_LIGHTGBM",
+      "kind": "local",
+      "station_runs": {
+        "bangkok_1304207": "local10",
+        "hanoi_bach_mai_13502154": "gsea15/local_target5",
+        "hcmc_cmt8_11357424": "gsea15/local_target5",
+        "kuala_lumpur_setia_12178404": "gsea15/local_target5",
+        "vientiane_unicef_12714979": "gsea15/local_target5",
+        "yangon_airgradient_14198580": "gsea15/local_target5"
+      }
+    },
+    {
+      "model_family": "PERSISTENCE",
+      "kind": "persistence",
+      "model_run": "persistence"
+    }
+  ],
+  "forecast_rows": 7212,
+  "observation_rows": 0,
+  "evaluated_rows": 0,
+  "outputs": {
+    "metrics_by_station.csv": "5d9d5d8888bc199f5cfbab10007b50fb0797d126a58238af6c3c6f170febf760",
+    "metrics_by_horizon.csv": "7e67f6fa63045c12214cdf704d925e6b1be0544b5fb5aa9706dffe8b564d49c7",
+    "metrics_by_day.csv": "98b4a4e6633a32fc1b29f1af0290956fc2d5cd8d66106d37fc897853a8081826",
+    "model_comparisons.csv": "ca8807aaf879a5d968726b62073e5939b8e09b06f20587fa6f8a6be87dae7329",
+    "REPORT.md": "a481bb3d9adcad0f1a4352e2d6e8670e71ab2cd60789822d5d0e04ae4b3df65d"
+  }
+}

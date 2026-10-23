@@ -1,0 +1,25 @@
+station_key,city,model_family,model_run,total_forecasts,evaluated,pending,unmatched_after_grace,rmse,mae,bias,truth_coverage_pct
+bangkok_1304207,Bangkok,GSEA15_GLOBAL,gsea15/global15,312,0,312,0,,,,0
+bangkok_1304207,Bangkok,GTH10_GLOBAL,gth10,312,0,312,0,,,,0
+bangkok_1304207,Bangkok,LOCAL_LIGHTGBM,local10,312,0,312,0,,,,0
+bangkok_1304207,Bangkok,PERSISTENCE,persistence,312,0,312,0,,,,0
+hanoi_bach_mai_13502154,Hanoi,GSEA15_GLOBAL,gsea15/global15,289,0,289,0,,,,0
+hanoi_bach_mai_13502154,Hanoi,GTH10_GLOBAL,gth10,289,0,289,0,,,,0
+hanoi_bach_mai_13502154,Hanoi,LOCAL_LIGHTGBM,gsea15/local_target5,289,0,289,0,,,,0
+hanoi_bach_mai_13502154,Hanoi,PERSISTENCE,persistence,289,0,289,0,,,,0
+hcmc_cmt8_11357424,Ho Chi Minh City,GSEA15_GLOBAL,gsea15/global15,312,0,312,0,,,,0
+hcmc_cmt8_11357424,Ho Chi Minh City,GTH10_GLOBAL,gth10,312,0,312,0,,,,0
+hcmc_cmt8_11357424,Ho Chi Minh City,LOCAL_LIGHTGBM,gsea15/local_target5,312,0,312,0,,,,0
+hcmc_cmt8_11357424,Ho Chi Minh City,PERSISTENCE,persistence,312,0,312,0,,,,0
+kuala_lumpur_setia_12178404,Kuala Lumpur,GSEA15_GLOBAL,gsea15/global15,266,0,266,0,,,,0
+kuala_lumpur_setia_12178404,Kuala Lumpur,GTH10_GLOBAL,gth10,266,0,266,0,,,,0
+kuala_lumpur_setia_12178404,Kuala Lumpur,LOCAL_LIGHTGBM,gsea15/local_target5,266,0,266,0,,,,0
+kuala_lumpur_setia_12178404,Kuala Lumpur,PERSISTENCE,persistence,266,0,266,0,,,,0
+vientiane_unicef_12714979,Vientiane,GSEA15_GLOBAL,gsea15/global15,312,0,312,0,,,,0
+vientiane_unicef_12714979,Vientiane,GTH10_GLOBAL,gth10,312,0,312,0,,,,0
+vientiane_unicef_12714979,Vientiane,LOCAL_LIGHTGBM,gsea15/local_target5,312,0,312,0,,,,0
+vientiane_unicef_12714979,Vientiane,PERSISTENCE,persistence,312,0,312,0,,,,0
+yangon_airgradient_14198580,Yangon,GSEA15_GLOBAL,gsea15/global15,312,0,312,0,,,,0
+yangon_airgradient_14198580,Yangon,GTH10_GLOBAL,gth10,312,0,312,0,,,,0
+yangon_airgradient_14198580,Yangon,LOCAL_LIGHTGBM,gsea15/local_target5,312,0,312,0,,,,0
+yangon_airgradient_14198580,Yangon,PERSISTENCE,persistence,312,0,312,0,,,,0
