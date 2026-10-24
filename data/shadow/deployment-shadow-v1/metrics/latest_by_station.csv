@@ -1,25 +1,25 @@
 station_key,country,city,model_family,model_run,total_forecasts,evaluated,pending,unmatched_after_grace,rmse,mae,bias,truth_coverage_pct
-bangkok_1304207,Thailand,Bangkok,GSEA15_GLOBAL,gsea15/global15,312,0,312,0,,,,0
-bangkok_1304207,Thailand,Bangkok,GTH10_GLOBAL,gth10,312,0,312,0,,,,0
-bangkok_1304207,Thailand,Bangkok,LOCAL_LIGHTGBM,local10,312,0,312,0,,,,0
-bangkok_1304207,Thailand,Bangkok,PERSISTENCE,persistence,312,0,312,0,,,,0
-hanoi_bach_mai_13502154,Vietnam,Hanoi,GSEA15_GLOBAL,gsea15/global15,289,0,289,0,,,,0
-hanoi_bach_mai_13502154,Vietnam,Hanoi,GTH10_GLOBAL,gth10,289,0,289,0,,,,0
-hanoi_bach_mai_13502154,Vietnam,Hanoi,LOCAL_LIGHTGBM,gsea15/local_target5,289,0,289,0,,,,0
-hanoi_bach_mai_13502154,Vietnam,Hanoi,PERSISTENCE,persistence,289,0,289,0,,,,0
-hcmc_cmt8_11357424,Vietnam,Ho Chi Minh City,GSEA15_GLOBAL,gsea15/global15,312,0,312,0,,,,0
-hcmc_cmt8_11357424,Vietnam,Ho Chi Minh City,GTH10_GLOBAL,gth10,312,0,312,0,,,,0
-hcmc_cmt8_11357424,Vietnam,Ho Chi Minh City,LOCAL_LIGHTGBM,gsea15/local_target5,312,0,312,0,,,,0
-hcmc_cmt8_11357424,Vietnam,Ho Chi Minh City,PERSISTENCE,persistence,312,0,312,0,,,,0
-kuala_lumpur_setia_12178404,Malaysia,Kuala Lumpur,GSEA15_GLOBAL,gsea15/global15,266,0,266,0,,,,0
-kuala_lumpur_setia_12178404,Malaysia,Kuala Lumpur,GTH10_GLOBAL,gth10,266,0,266,0,,,,0
-kuala_lumpur_setia_12178404,Malaysia,Kuala Lumpur,LOCAL_LIGHTGBM,gsea15/local_target5,266,0,266,0,,,,0
-kuala_lumpur_setia_12178404,Malaysia,Kuala Lumpur,PERSISTENCE,persistence,266,0,266,0,,,,0
-vientiane_unicef_12714979,Laos,Vientiane,GSEA15_GLOBAL,gsea15/global15,312,0,312,0,,,,0
-vientiane_unicef_12714979,Laos,Vientiane,GTH10_GLOBAL,gth10,312,0,312,0,,,,0
-vientiane_unicef_12714979,Laos,Vientiane,LOCAL_LIGHTGBM,gsea15/local_target5,312,0,312,0,,,,0
-vientiane_unicef_12714979,Laos,Vientiane,PERSISTENCE,persistence,312,0,312,0,,,,0
-yangon_airgradient_14198580,Myanmar,Yangon,GSEA15_GLOBAL,gsea15/global15,312,0,312,0,,,,0
-yangon_airgradient_14198580,Myanmar,Yangon,GTH10_GLOBAL,gth10,312,0,312,0,,,,0
-yangon_airgradient_14198580,Myanmar,Yangon,LOCAL_LIGHTGBM,gsea15/local_target5,312,0,312,0,,,,0
-yangon_airgradient_14198580,Myanmar,Yangon,PERSISTENCE,persistence,312,0,312,0,,,,0
+bangkok_1304207,Thailand,Bangkok,GSEA15_GLOBAL,gsea15/global15,888,300,588,0,10.68269,9.8911828,-9.8911828,33.783784
+bangkok_1304207,Thailand,Bangkok,GTH10_GLOBAL,gth10,888,300,588,0,10.762267,9.8835017,-9.8835017,33.783784
+bangkok_1304207,Thailand,Bangkok,LOCAL_LIGHTGBM,local10,888,300,588,0,9.2071494,8.2757116,-8.2757116,33.783784
+bangkok_1304207,Thailand,Bangkok,PERSISTENCE,persistence,888,300,588,0,7.6086639,6.1943333,-6.1943333,33.783784
+hanoi_bach_mai_13502154,Vietnam,Hanoi,GSEA15_GLOBAL,gsea15/global15,865,286,579,0,15.426732,12.009282,6.3004837,33.063584
+hanoi_bach_mai_13502154,Vietnam,Hanoi,GTH10_GLOBAL,gth10,865,286,579,0,15.391545,11.993459,6.7943402,33.063584
+hanoi_bach_mai_13502154,Vietnam,Hanoi,LOCAL_LIGHTGBM,gsea15/local_target5,865,286,579,0,14.730247,11.699565,6.3780827,33.063584
+hanoi_bach_mai_13502154,Vietnam,Hanoi,PERSISTENCE,persistence,865,286,579,0,25.271613,20.555699,10.730385,33.063584
+hcmc_cmt8_11357424,Vietnam,Ho Chi Minh City,GSEA15_GLOBAL,gsea15/global15,842,286,556,0,13.80978,10.259916,3.6322693,33.966746
+hcmc_cmt8_11357424,Vietnam,Ho Chi Minh City,GTH10_GLOBAL,gth10,842,286,556,0,13.750125,10.610023,4.2372404,33.966746
+hcmc_cmt8_11357424,Vietnam,Ho Chi Minh City,LOCAL_LIGHTGBM,gsea15/local_target5,842,286,556,0,11.900339,7.5320375,0.93959701,33.966746
+hcmc_cmt8_11357424,Vietnam,Ho Chi Minh City,PERSISTENCE,persistence,842,286,556,0,25.574263,18.988112,9.8916084,33.966746
+kuala_lumpur_setia_12178404,Malaysia,Kuala Lumpur,GSEA15_GLOBAL,gsea15/global15,704,251,453,0,10.488416,7.6349274,-2.1368698,35.653409
+kuala_lumpur_setia_12178404,Malaysia,Kuala Lumpur,GTH10_GLOBAL,gth10,704,251,453,0,10.407163,7.5294935,-1.3784441,35.653409
+kuala_lumpur_setia_12178404,Malaysia,Kuala Lumpur,LOCAL_LIGHTGBM,gsea15/local_target5,704,251,453,0,18.522479,16.359058,-14.666279,35.653409
+kuala_lumpur_setia_12178404,Malaysia,Kuala Lumpur,PERSISTENCE,persistence,704,251,453,0,12.848546,9.9031873,5.1964143,35.653409
+vientiane_unicef_12714979,Laos,Vientiane,GSEA15_GLOBAL,gsea15/global15,842,286,556,0,18.499949,11.911779,-10.545344,33.966746
+vientiane_unicef_12714979,Laos,Vientiane,GTH10_GLOBAL,gth10,842,286,556,0,18.061113,11.867129,-8.8735121,33.966746
+vientiane_unicef_12714979,Laos,Vientiane,LOCAL_LIGHTGBM,gsea15/local_target5,842,286,556,0,18.752054,12.178461,-10.953071,33.966746
+vientiane_unicef_12714979,Laos,Vientiane,PERSISTENCE,persistence,842,286,556,0,21.551146,15.835664,-2.9979021,33.966746
+yangon_airgradient_14198580,Myanmar,Yangon,GSEA15_GLOBAL,gsea15/global15,888,324,564,0,15.765873,12.425454,2.7207923,36.486486
+yangon_airgradient_14198580,Myanmar,Yangon,GTH10_GLOBAL,gth10,888,324,564,0,15.637279,12.27356,2.2550872,36.486486
+yangon_airgradient_14198580,Myanmar,Yangon,LOCAL_LIGHTGBM,gsea15/local_target5,888,324,564,0,15.846388,12.393866,1.3029293,36.486486
+yangon_airgradient_14198580,Myanmar,Yangon,PERSISTENCE,persistence,888,324,564,0,26.911214,21.409259,9.9685185,36.486486
