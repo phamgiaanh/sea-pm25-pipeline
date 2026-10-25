@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "api_version": "v1",
+  "serve_version": "SERVE_V1",
+  "feature_contract_version": "v1.3",
+  "source_lookback_days": 14,
+  "stations": [
+    {
+      "station_key": "bangkok_1304207",
+      "status": "pilot",
+      "model_family": "GTH10_GLOBAL",
+      "kind": "global",
+      "model_run": "gth10"
+    }
+  ]
+}

@@ -57,6 +57,10 @@ def main() -> None:
     frozen.add_argument("--source-run", required=True)
     frozen.add_argument("--output-run", required=True)
     frozen.add_argument("--eval-cohort", required=True)
+    compose = subparsers.add_parser("compose-snapshot")
+    compose.add_argument("--snapshot", required=True)
+    compose.add_argument("--source-snapshot", action="append", required=True)
+    compose.add_argument("--cohort", required=True)
     evaluation = subparsers.add_parser("evaluate-expansion")
     evaluation.add_argument("--report", required=True)
     evaluation.add_argument("--baseline-run", required=True)
@@ -72,6 +76,20 @@ def main() -> None:
     gsea_evaluation.add_argument("--expanded-run", required=True)
     gsea_evaluation.add_argument("--local-run", required=True)
     gsea_evaluation.add_argument("--eval-cohort", required=True)
+    gsea20_evaluation = subparsers.add_parser("evaluate-gsea20")
+    gsea20_evaluation.add_argument("--report", required=True)
+    gsea20_evaluation.add_argument("--baseline-run", required=True)
+    gsea20_evaluation.add_argument("--expanded-run", required=True)
+    gsea20_evaluation.add_argument("--eval-cohort", default="gsea20_eval10")
+    gsea20_evaluation.add_argument("--target-cohort", default="gsea20_target5")
+    gsea20_evaluation.add_argument("--new-cohort", default="gsea20_new5")
+    balanced = subparsers.add_parser("train-balanced-gsea15")
+    balanced.add_argument("--snapshot", required=True)
+    balanced.add_argument("--output-run", required=True)
+    balanced.add_argument("--baseline-run", required=True)
+    balanced.add_argument("--train-cohort", default="gsea15")
+    balanced.add_argument("--eval-cohort", default="gsea15_new5")
+    balanced.add_argument("--feature-set")
     live_audit = subparsers.add_parser("audit-live")
     live_audit.add_argument("--audit-id", required=True)
     live_audit.add_argument("--cohort", required=True)
@@ -219,6 +237,16 @@ def main() -> None:
             args.output_run,
             args.eval_cohort,
         )
+    elif args.command == "compose-snapshot":
+        from .compose import compose_feature_snapshot
+
+        result = compose_feature_snapshot(
+            stations,
+            root / "data" / "processed",
+            args.snapshot,
+            args.source_snapshot,
+            args.cohort,
+        )
     elif args.command == "evaluate-expansion":
         from .evaluation import evaluate_station_expansion
 
@@ -247,6 +275,35 @@ def main() -> None:
             args.expanded_run,
             args.local_run,
             args.eval_cohort,
+        )
+    elif args.command == "evaluate-gsea20":
+        from .evaluation import evaluate_gsea20
+
+        result = evaluate_gsea20(
+            stations,
+            experiment,
+            root / "artifacts",
+            args.report,
+            args.baseline_run,
+            args.expanded_run,
+            args.eval_cohort,
+            args.target_cohort,
+            args.new_cohort,
+        )
+    elif args.command == "train-balanced-gsea15":
+        from .balanced import train_balanced_gsea15
+
+        result = train_balanced_gsea15(
+            stations,
+            experiment,
+            args.snapshot,
+            root / "data" / "processed",
+            root / "artifacts",
+            args.output_run,
+            args.baseline_run,
+            args.train_cohort,
+            args.eval_cohort,
+            args.feature_set,
         )
     elif args.command == "audit-live":
         from .live_readiness import OpenAQAuthenticationError, audit_live_readiness

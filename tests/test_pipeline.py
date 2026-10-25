@@ -11,7 +11,9 @@ from unittest.mock import patch
 import numpy as np
 import pandas as pd
 
+from pm25_pipeline.balanced import _candidate_summary, _station_horizon_metrics, sample_weights
 from pm25_pipeline.collect import month_windows, parse_utc
+from pm25_pipeline.compose import compose_feature_snapshot
 from pm25_pipeline.config import (
     Station,
     experiment_digest,
@@ -124,6 +126,138 @@ def _iso_test(value: pd.Timestamp) -> str:
 
 
 class PipelineTests(unittest.TestCase):
+    def test_gsea20_cohorts_are_fixed_and_disjoint(self):
+        stations = load_stations(Path(__file__).resolve().parents[1] / "config" / "stations.csv")
+        gsea15 = {station.station_key for station in stations if "gsea15" in station.cohorts}
+        gsea20 = {station.station_key for station in stations if "gsea20" in station.cohorts}
+        target5 = {station.station_key for station in stations if "gsea20_target5" in station.cohorts}
+        new5 = {station.station_key for station in stations if "gsea20_new5" in station.cohorts}
+        eval10 = {station.station_key for station in stations if "gsea20_eval10" in station.cohorts}
+        self.assertEqual(len(gsea15), 15)
+        self.assertEqual(len(gsea20), 20)
+        self.assertEqual(len(target5), 5)
+        self.assertEqual(len(new5), 5)
+        self.assertFalse(target5 & new5)
+        self.assertEqual(target5 | new5, eval10)
+        self.assertEqual(gsea20 - gsea15, new5)
+        self.assertNotIn("jakarta_lab_lingkungan_17766208", gsea20)
+
+    def test_compose_snapshot_uses_first_source_for_overlap(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            stations = [
+                replace(STATION, station_key="a", cohorts=("combined",)),
+                replace(STATION, station_key="b", cohorts=("combined",)),
+            ]
+            common_manifest = {
+                "feature_contract_version": "v1.3",
+                "selected_feature_set": "pm25_weather_calendar_altitude",
+                "feature_sets": {"x": ["value"]},
+                "targets": ["target_h1"],
+                "gap_policy": "test",
+                "weather_alignment": "test",
+                "weather_missing_policy": {"mode": "test"},
+                "altitude_definition": "test",
+            }
+            for source, rows in (
+                ("first", [("a", 1.0)]),
+                ("second", [("a", 99.0), ("b", 2.0)]),
+            ):
+                source_dir = root / source
+                source_dir.mkdir()
+                frame = pd.DataFrame(
+                    [
+                        {
+                            "station_key": station,
+                            "origin_time_utc": "2026-01-01T00:00:00Z",
+                            "value": value,
+                            "target_h1": value,
+                        }
+                        for station, value in rows
+                    ]
+                )
+                path = source_dir / "features.csv.gz"
+                frame.to_csv(path, index=False, compression=DETERMINISTIC_GZIP)
+                manifest = {
+                    **common_manifest,
+                    "stations": sorted(frame["station_key"].unique()),
+                    "rows": len(frame),
+                    "features_sha256": sha256_file(path),
+                }
+                (source_dir / "feature_manifest.json").write_text(
+                    json.dumps(manifest), encoding="utf-8"
+                )
+            output = compose_feature_snapshot(
+                stations, root, "combined", ["first", "second"], "combined"
+            )
+            combined = pd.read_csv(output)
+            self.assertEqual(dict(zip(combined["station_key"], combined["value"])), {"a": 1.0, "b": 2.0})
+            provenance = json.loads((root / "combined" / "composition_manifest.json").read_text())
+            self.assertEqual(provenance["station_source"], {"a": "first", "b": "second"})
+
+    def test_station_balanced_weights_give_each_station_equal_total(self):
+        frame = pd.DataFrame(
+            {
+                "station_key": ["a", "a", "a", "b"],
+                "country": ["X", "X", "X", "Y"],
+            }
+        )
+        weights = sample_weights(frame, "station_balanced")
+        totals = frame.assign(weight=weights).groupby("station_key")["weight"].sum()
+        self.assertAlmostEqual(float(weights.mean()), 1.0)
+        self.assertAlmostEqual(float(totals["a"]), float(totals["b"]))
+
+    def test_country_balanced_weights_equalize_countries_then_stations(self):
+        frame = pd.DataFrame(
+            {
+                "station_key": ["a", "a", "b", "c", "c", "c", "c"],
+                "country": ["X", "X", "X", "Y", "Y", "Y", "Y"],
+            }
+        )
+        weights = sample_weights(frame, "country_balanced")
+        weighted = frame.assign(weight=weights)
+        countries = weighted.groupby("country")["weight"].sum()
+        stations = weighted.groupby("station_key")["weight"].sum()
+        self.assertAlmostEqual(float(weights.mean()), 1.0)
+        self.assertAlmostEqual(float(countries["X"]), float(countries["Y"]))
+        self.assertAlmostEqual(float(stations["a"]), float(stations["b"]))
+        self.assertAlmostEqual(float(stations["c"]), float(countries["Y"]))
+
+    def test_balanced_candidate_is_selected_by_validation_macro_rmse(self):
+        rows = []
+        for scheme, error in (
+            ("unweighted", 3.0),
+            ("station_balanced", 1.0),
+            ("country_balanced", 2.0),
+        ):
+            for station in ("a", "b"):
+                rows.append(
+                    {
+                        "scheme": scheme,
+                        "model": "LIGHTGBM_GLOBAL",
+                        "station_key": station,
+                        "horizon": 1,
+                        "observed": 10.0,
+                        "predicted": 10.0 + error,
+                    }
+                )
+        for station in ("a", "b"):
+            rows.append(
+                {
+                    "scheme": "persistence",
+                    "model": "PERSISTENCE",
+                    "station_key": station,
+                    "horizon": 1,
+                    "observed": 10.0,
+                    "predicted": 14.0,
+                }
+            )
+        predictions = pd.DataFrame(rows)
+        metrics = _station_horizon_metrics(predictions)
+        summary = _candidate_summary(metrics, predictions)
+        selected = summary.loc[summary["selected"], "scheme"].iloc[0]
+        self.assertEqual(selected, "station_balanced")
+
     def test_shadow_config_is_fixed_to_the_deployment_candidates(self):
         config_dir = Path(__file__).resolve().parents[1] / "config"
         config = load_shadow_config(config_dir / "shadow_deployment.json")

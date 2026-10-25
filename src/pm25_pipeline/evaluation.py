@@ -850,3 +850,214 @@ def evaluate_gsea15(
         json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
     return paths["report"]
+
+
+def evaluate_gsea20(
+    stations: list[Station],
+    experiment: dict,
+    artifacts_root: Path,
+    report_name: str,
+    baseline_run: str,
+    expanded_run: str,
+    eval_cohort: str,
+    target_cohort: str,
+    new_cohort: str,
+) -> Path:
+    """Evaluate G-SEA20 without changing the frozen deployment target cohort."""
+    if not report_name or any(part in report_name for part in ("/", "\\", "..")):
+        raise ValueError("report_name must be a simple directory name")
+    expected_horizons = list(experiment["horizons_hours"])
+    selected_horizons = list(experiment["screening_horizons_hours"])
+    eval_keys = _cohort_keys(stations, eval_cohort)
+    target_keys = _cohort_keys(stations, target_cohort)
+    new_keys = _cohort_keys(stations, new_cohort)
+    if target_keys & new_keys or target_keys | new_keys != eval_keys:
+        raise ValueError("target and new cohorts must be disjoint and cover eval_cohort")
+
+    baseline_predictions, baseline_manifest, baseline_fits = _load_run(
+        artifacts_root, baseline_run
+    )
+    expanded_predictions, expanded_manifest, expanded_fits = _load_run(
+        artifacts_root, expanded_run
+    )
+    manifests = [baseline_manifest, expanded_manifest]
+    if len({manifest.get("snapshot") for manifest in manifests}) != 1:
+        raise RuntimeError("G-SEA20 runs do not share one snapshot")
+    if len({manifest.get("features_sha256") for manifest in manifests}) != 1:
+        raise RuntimeError("G-SEA20 runs do not share one feature table")
+    if {manifest.get("experiment_config_sha256") for manifest in manifests} != {
+        experiment_digest(experiment)
+    }:
+        raise RuntimeError("G-SEA20 run experiment hash does not match requested config")
+    for name, manifest in (("baseline", baseline_manifest), ("expanded", expanded_manifest)):
+        if set(manifest.get("eval_stations", [])) != eval_keys:
+            raise RuntimeError(f"{name} evaluation cohort does not match {eval_cohort}")
+
+    model_counts = {
+        "GSEA15_FROZEN": _validate_models(
+            artifacts_root, baseline_run, baseline_fits, expected_horizons
+        ),
+        "GSEA20_GLOBAL": _validate_models(
+            artifacts_root, expanded_run, expanded_fits, expected_horizons
+        ),
+    }
+    frames = {
+        "GSEA15_FROZEN": _select_model(
+            baseline_predictions, "LIGHTGBM_GLOBAL", "GSEA15_FROZEN", selected_horizons
+        ),
+        "GSEA20_GLOBAL": _select_model(
+            expanded_predictions, "LIGHTGBM_GLOBAL", "GSEA20_GLOBAL", selected_horizons
+        ),
+        "PERSISTENCE": _select_model(
+            expanded_predictions, "PERSISTENCE", "PERSISTENCE", selected_horizons
+        ),
+    }
+    _validate_aligned_predictions(frames)
+    predictions = pd.concat(frames.values(), ignore_index=True)
+    if set(predictions["station_key"]) != eval_keys:
+        raise RuntimeError("prediction stations do not exactly match G-SEA20 eval cohort")
+
+    station_metrics = _station_horizon_metrics(
+        predictions, stations, target_keys, new_keys, "TRAINING_NEW5"
+    )
+    station_map = {station.station_key: station for station in stations}
+    scopes = [
+        {"scope_type": "COHORT", "scope": "ALL10", "keys": eval_keys},
+        {"scope_type": "COHORT", "scope": "DEPLOYMENT_TARGET5", "keys": target_keys},
+        {"scope_type": "COHORT", "scope": "TRAINING_NEW5", "keys": new_keys},
+    ]
+    for country in sorted({station_map[key].country for key in eval_keys}):
+        scopes.append(
+            {
+                "scope_type": "COUNTRY",
+                "scope": country,
+                "keys": {key for key in eval_keys if station_map[key].country == country},
+            }
+        )
+    summary = _summary_metrics(predictions, station_metrics, scopes)
+    horizon_metrics = _horizon_metrics(predictions, station_metrics, scopes)
+    comparisons = _generic_comparisons(
+        summary,
+        [
+            ("GSEA20_VS_GSEA15", "GSEA15_FROZEN", "GSEA20_GLOBAL"),
+            ("GSEA20_VS_PERSISTENCE", "PERSISTENCE", "GSEA20_GLOBAL"),
+        ],
+    )
+
+    station_rows: list[dict] = []
+    for station_key in sorted(eval_keys):
+        values = {
+            label: _metric_values(frame.loc[frame["station_key"].eq(station_key)])
+            for label, frame in frames.items()
+        }
+        baseline_rmse = float(values["GSEA15_FROZEN"]["rmse"])
+        expanded_rmse = float(values["GSEA20_GLOBAL"]["rmse"])
+        persistence_rmse = float(values["PERSISTENCE"]["rmse"])
+        station_rows.append(
+            {
+                "station_key": station_key,
+                "country": station_map[station_key].country,
+                "city": station_map[station_key].city,
+                "role": "DEPLOYMENT_TARGET" if station_key in target_keys else "TRAINING_CANDIDATE",
+                "gsea15_frozen_rmse": baseline_rmse,
+                "gsea20_rmse": expanded_rmse,
+                "persistence_rmse": persistence_rmse,
+                "gsea20_vs_gsea15_pct": 100 * (expanded_rmse - baseline_rmse) / baseline_rmse,
+                "gsea20_skill_vs_persistence_pct": 100
+                * (persistence_rmse - expanded_rmse)
+                / persistence_rmse,
+            }
+        )
+    station_summary = pd.DataFrame(station_rows).sort_values(["role", "station_key"])
+
+    pooled = summary.loc[
+        summary["scope_type"].eq("COHORT")
+        & summary["aggregation"].eq("MICRO_POOLED")
+    ].set_index(["scope", "run_label"])
+    target_baseline = float(pooled.loc[("DEPLOYMENT_TARGET5", "GSEA15_FROZEN"), "rmse"])
+    target_expanded = float(pooled.loc[("DEPLOYMENT_TARGET5", "GSEA20_GLOBAL"), "rmse"])
+    target_persistence = float(pooled.loc[("DEPLOYMENT_TARGET5", "PERSISTENCE"), "rmse"])
+    target_change = 100 * (target_expanded - target_baseline) / target_baseline
+    target_skill = 100 * (target_persistence - target_expanded) / target_persistence
+    micro = horizon_metrics.loc[
+        horizon_metrics["scope_type"].eq("COHORT")
+        & horizon_metrics["scope"].eq("DEPLOYMENT_TARGET5")
+        & horizon_metrics["aggregation"].eq("MICRO")
+    ].pivot(index="horizon", columns="run_label", values="rmse")
+    target_wins = int((micro["GSEA20_GLOBAL"] < micro["GSEA15_FROZEN"]).sum())
+
+    output_dir = artifacts_root / "evaluations" / report_name
+    output_dir.mkdir(parents=True, exist_ok=False)
+    paths = {
+        "summary_metrics": output_dir / "summary_metrics.csv",
+        "metrics_by_horizon": output_dir / "metrics_by_horizon.csv",
+        "station_horizon_metrics": output_dir / "station_horizon_metrics.csv",
+        "station_summary": output_dir / "station_summary.csv",
+        "comparisons": output_dir / "comparisons.csv",
+        "report": output_dir / "REPORT.md",
+    }
+    summary.to_csv(paths["summary_metrics"], index=False, float_format="%.10g")
+    horizon_metrics.to_csv(paths["metrics_by_horizon"], index=False, float_format="%.10g")
+    station_metrics.to_csv(paths["station_horizon_metrics"], index=False, float_format="%.10g")
+    station_summary.to_csv(paths["station_summary"], index=False, float_format="%.10g")
+    comparisons.to_csv(paths["comparisons"], index=False, float_format="%.10g")
+    rows = [
+        f"| `{row.station_key}` | {row.city} | {row.role} | {row.gsea15_frozen_rmse:.3f} | "
+        f"{row.gsea20_rmse:.3f} | {row.persistence_rmse:.3f} | {row.gsea20_vs_gsea15_pct:+.1f}% |"
+        for row in station_summary.itertuples(index=False)
+    ]
+    report = [
+        "# G-SEA20 station-expansion evaluation",
+        "",
+        f"- Snapshot: `{baseline_manifest['snapshot']}`",
+        f"- Training cohort: `gsea20` (20 stations)",
+        f"- Primary deployment evaluation cohort: `{target_cohort}` (5 fixed stations)",
+        f"- Secondary diagnostic cohort: `{new_cohort}` (5 training candidates)",
+        f"- Frozen test window: `{experiment['test_start_utc']}` through `{experiment['test_end_utc']}`",
+        f"- Screening horizons: `{', '.join(f'h{h}' for h in selected_horizons)}`",
+        "- The frozen G-SEA15 model was rescored on exactly the same rows as G-SEA20.",
+        "",
+        "## Primary deployment-target result",
+        "",
+        f"- Frozen G-SEA15 RMSE: `{target_baseline:.3f}`",
+        f"- G-SEA20 RMSE: `{target_expanded:.3f}` (`{target_change:+.1f}%`; negative is better)",
+        f"- Persistence RMSE: `{target_persistence:.3f}` (G-SEA20 skill `{target_skill:+.1f}%`)",
+        f"- G-SEA20 beats frozen G-SEA15 at `{target_wins}/{len(selected_horizons)}` screening horizons.",
+        "",
+        "## Station detail",
+        "",
+        "| Station | City | Role | G-SEA15 frozen | G-SEA20 | Persistence | G-SEA20 vs G-SEA15 |",
+        "|---|---|---|---:|---:|---:|---:|",
+        *rows,
+        "",
+        "The five added stations are training candidates, not automatically deployment targets. A target promotion still requires live readiness, useful geographic coverage, held-out performance and post-cutoff shadow evidence. Jakarta Lab is excluded because it has no train or validation rows before the frozen split.",
+        "",
+    ]
+    paths["report"].write_text("\n".join(report), encoding="utf-8")
+    input_runs = {}
+    for run in (baseline_run, expanded_run):
+        run_dir = artifacts_root / run
+        input_runs[run] = {
+            "run_manifest_sha256": sha256_file(run_dir / "run_manifest.json"),
+            "fit_manifest_sha256": sha256_file(run_dir / "fit_manifest.csv"),
+            "predictions_sha256": sha256_file(run_dir / "predictions.csv.gz"),
+        }
+    manifest = {
+        "report": report_name,
+        "feature_contract_version": experiment["feature_contract_version"],
+        "selected_horizons": selected_horizons,
+        "eval_cohort": eval_cohort,
+        "target_cohort": target_cohort,
+        "new_cohort": new_cohort,
+        "model_counts": model_counts,
+        "station_config_sha256": stations_digest(stations),
+        "experiment_config_sha256": experiment_digest(experiment),
+        "implementation_sha256": sha256_file(Path(__file__)),
+        "input_runs": input_runs,
+        "outputs": {name: sha256_file(path) for name, path in paths.items()},
+    }
+    (output_dir / "manifest.json").write_text(
+        json.dumps(manifest, indent=2, sort_keys=True, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    return paths["report"]

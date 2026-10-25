@@ -158,6 +158,24 @@ must use new values such as `GSEA15_GLOBAL_RUN=gsea15/global15-v2`,
 `GSEA15_BASELINE_RUN=gsea15/gth10-incumbent-v2` and
 `GSEA15_REPORT=gsea15-v2`; the pipeline refuses to overwrite an existing run.
 
+### Balanced G-SEA15 follow-up
+
+The weighting experiment keeps the G-SEA15 stations, feature contract, model
+parameters and time split fixed. It screens three global LightGBM variants on
+the validation window: the unweighted control, equal total weight per station,
+and equal total weight per country followed by equal weight per station within
+that country. The lowest station-horizon macro RMSE wins. Only that winner is
+refit on train plus validation and evaluated on the frozen test window.
+
+```bash
+make reproduce-gsea15-balanced
+```
+
+Outputs are contained under `artifacts/gsea15_balanced/v1/`: validation-only
+screening evidence in `screening/`, the 30 final models in `champion/`, aligned
+test comparison tables, hashes and `REPORT.md`. This experiment does not alter
+the serving configuration or the separate shadow-live campaign.
+
 ## Inputs and outputs
 
 - `config/stations.csv`: the only station/cohort registry used by code.
@@ -172,6 +190,25 @@ The product still serves up to 24 future hourly predictions. Horizons 25--30
 provide enough buffer to keep that full window when the newest PM2.5 observation
 is as much as six hours old. A fresh origin uses `h1`--`h24`; an origin six hours
 old uses `h7`--`h30`.
+
+## Forecast API
+
+The versioned API uses the same verified model bundles and live feature builder
+as shadow monitoring. ICT sends only a configured `station_id`; the DS service
+retrieves OpenAQ PM2.5 and Open-Meteo weather/altitude, applies the causal v1.3
+feature contract, and returns exactly 24 future timestamps when readiness gates
+pass.
+
+```bash
+export OPENAQ_API_KEY="..."
+export PM25_API_TOKEN="..."  # recommended outside local development
+make serve
+```
+
+Production routing is isolated in `config/api_deployment.json`. `SERVE_V1`
+currently exposes only the Bangkok pilot with G-TH10; G-SEA15 and local models
+remain shadow alternatives until the shadow campaign promotes a winner. See
+`README_API.md` for the ICT request/response contract and operational behavior.
 
 Local model files are stored as
 `artifacts/local/models/<station_key>/h<horizon>.txt`. With the current five
@@ -288,3 +325,24 @@ Forecast and observation ledgers are append-only under
 provider responses go to ignored `runtime/shadow_evidence/`. The campaign does
 not change the active serving registry. See `SHADOW_LIVE_SETUP_VI.md` for the
 private GitHub repository and Cloudflare Worker setup.
+
+### G-SEA20 training expansion
+
+G-SEA20 adds five trainable, geographically useful candidates to G-SEA15:
+Hanoi Nhân Chính, Singapore Midwood, Kuala Lumpur TTDI, Manila Mandaluyong,
+and Vientiane Mahosot. Jakarta Lab remains excluded because its sensor starts
+after the frozen train and validation periods.
+
+The modelling snapshot is composed reproducibly from the immutable G-SEA15 and
+SERVE_V2 candidate feature snapshots. If a station is present in both, the
+first source wins and the exact station-to-source mapping and hashes are stored
+in `composition_manifest.json`.
+
+```bash
+make reproduce-gsea20
+```
+
+The primary comparison remains the five fixed deployment targets; the five new
+stations form a secondary diagnostic cohort. Training membership does not alter
+`serve_v1.csv` or the API routing configuration, and no new station is promoted
+without live-readiness plus post-cutoff shadow evidence.
