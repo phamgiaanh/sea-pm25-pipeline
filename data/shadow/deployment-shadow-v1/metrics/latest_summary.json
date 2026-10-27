@@ -30,14 +30,14 @@
       "model_run": "persistence"
     }
   ],
-  "generated_at_utc": "2026-10-26T04:44:12.076388Z",
-  "runs_considered": 85,
-  "forecasts_considered": 46660,
-  "station_attempts": 2040,
-  "station_successes": 2040,
+  "generated_at_utc": "2026-10-27T04:44:07.446073Z",
+  "runs_considered": 109,
+  "forecasts_considered": 59932,
+  "station_attempts": 2616,
+  "station_successes": 2616,
   "issuance_arm_coverage": 1.0,
-  "evaluated": 33252,
-  "pending": 13408,
+  "evaluated": 46428,
+  "pending": 13504,
   "unmatched_after_grace": 0,
   "scoring_grace_hours": 12,
   "ground_truth_source": "exact OpenAQ sensor one-hour interval-end match; no interpolation",
@@ -46,50 +46,50 @@
     {
       "station_key": "bangkok_1304207",
       "sensor_id": 1304207,
-      "sha256": "78c8eeba32c4544014c4bfa3fa6f531d99279f7429d80f331e35c9de9b7c080a",
-      "valid_truth_rows": 73,
-      "path": "runtime/shadow_evidence/score_20261026T044412Z/bangkok_1304207/openaq_truth.json"
+      "sha256": "69913ab691e620c3ce1d858dd000e3b452b54945a8e62464583bee9715f58c5c",
+      "valid_truth_rows": 97,
+      "path": "runtime/shadow_evidence/score_20261027T044407Z/bangkok_1304207/openaq_truth.json"
     },
     {
       "station_key": "hanoi_bach_mai_13502154",
       "sensor_id": 13502154,
-      "sha256": "cb539db539de20d2a74630b155b7b8dd0b390194bcc86e43ea54f56894555e40",
-      "valid_truth_rows": 73,
-      "path": "runtime/shadow_evidence/score_20261026T044412Z/hanoi_bach_mai_13502154/openaq_truth.json"
+      "sha256": "682f9048e6e9ac0cb66340628e5163b03ab7c7467770094ba589fc40f873c83a",
+      "valid_truth_rows": 97,
+      "path": "runtime/shadow_evidence/score_20261027T044407Z/hanoi_bach_mai_13502154/openaq_truth.json"
     },
     {
       "station_key": "hcmc_cmt8_11357424",
       "sensor_id": 11357424,
-      "sha256": "0c31731c10f7810071a013d1ed9401f91491dfb54d0c7936a219a0211f42577a",
-      "valid_truth_rows": 73,
-      "path": "runtime/shadow_evidence/score_20261026T044412Z/hcmc_cmt8_11357424/openaq_truth.json"
+      "sha256": "5effa568b12235744fc576782be8ace4ddcadb1a9c7c774b9a35a6dee9438e60",
+      "valid_truth_rows": 97,
+      "path": "runtime/shadow_evidence/score_20261027T044407Z/hcmc_cmt8_11357424/openaq_truth.json"
     },
     {
       "station_key": "kuala_lumpur_setia_12178404",
       "sensor_id": 12178404,
-      "sha256": "ec628db8a73a2352524bcd9dbc10149e14334cb981291b2b8ea63a87111e1317",
-      "valid_truth_rows": 73,
-      "path": "runtime/shadow_evidence/score_20261026T044412Z/kuala_lumpur_setia_12178404/openaq_truth.json"
+      "sha256": "c449baa5da51d5e1aea39c89d1765d78d01d03cff0c532900af28eeb3c924ed5",
+      "valid_truth_rows": 97,
+      "path": "runtime/shadow_evidence/score_20261027T044407Z/kuala_lumpur_setia_12178404/openaq_truth.json"
     },
     {
       "station_key": "vientiane_unicef_12714979",
       "sensor_id": 12714979,
-      "sha256": "08c30520a7e34016028f599801c7f4d0864ec4629b955a548b886b5f96819841",
-      "valid_truth_rows": 73,
-      "path": "runtime/shadow_evidence/score_20261026T044412Z/vientiane_unicef_12714979/openaq_truth.json"
+      "sha256": "96889737c1645b2881a01a3931348151061bb35d77823b80768fb5533519b7e9",
+      "valid_truth_rows": 97,
+      "path": "runtime/shadow_evidence/score_20261027T044407Z/vientiane_unicef_12714979/openaq_truth.json"
     },
     {
       "station_key": "yangon_airgradient_14198580",
       "sensor_id": 14198580,
-      "sha256": "4fc5ab8393b5fcf801bc6b751deefb94526fba19ed87c7e294bd6661c90933cf",
-      "valid_truth_rows": 73,
-      "path": "runtime/shadow_evidence/score_20261026T044412Z/yangon_airgradient_14198580/openaq_truth.json"
+      "sha256": "632d286612f7a60301818229ccd510f859558f2fe0d9b0d09d79976c0b0d4ca5",
+      "valid_truth_rows": 97,
+      "path": "runtime/shadow_evidence/score_20261027T044407Z/yangon_airgradient_14198580/openaq_truth.json"
     }
   ],
   "fetch_errors": {},
   "outputs": {
-    "latest_by_model.csv": "ccc78b5b291be74774e00bd90b852ef1ba14d19aa51a6f08f8d9ad5f6c457b10",
-    "latest_by_station.csv": "6ad78c8684b7e8de41e03eeb2ef573f7c76a2c87bd93238cfe50e61367e8766d",
-    "latest_by_station_horizon.csv": "44ee4564d4a56feb6d7b9ed499db3318e76f849fc4a466c562b3dbf4a57d06de"
+    "latest_by_model.csv": "f9ab3a5ea978b37393470c7862077a5d8c235946d5e3a3de74243eb3c5ba755a",
+    "latest_by_station.csv": "8ee7176081883dce50fa213d60ee8a40fe93ecdb18d96808bab604319387d860",
+    "latest_by_station_horizon.csv": "3bb3e818df5fd46886e6b2f1c0716c448d1e2451d36861f4aba68e3240d1f9ed"
   }
 }
