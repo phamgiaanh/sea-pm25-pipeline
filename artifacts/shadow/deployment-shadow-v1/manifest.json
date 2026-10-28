@@ -31,14 +31,14 @@
       "model_run": "persistence"
     }
   ],
-  "forecast_rows": 59932,
-  "observation_rows": 576,
-  "evaluated_rows": 46428,
+  "forecast_rows": 72460,
+  "observation_rows": 720,
+  "evaluated_rows": 59664,
   "outputs": {
-    "metrics_by_station.csv": "bec3f2e12f5b879bebbb034d977c59a1251452c82f00529609ecf7c0267c4434",
-    "metrics_by_horizon.csv": "2a38a8219afed3331efb299e5ef49b8996c3715244d33238ec9f3958cfd8ccf8",
-    "metrics_by_day.csv": "30d0f9fdd9e22edd012b976258f1e4b4f7efe0d5880f76b5fcc7bf3bf335c696",
-    "model_comparisons.csv": "f0ba5ebf34c385ddd97e48aaefc796e8d704e0d6f5ec029ea4c13f8d3a9de3ac",
-    "REPORT.md": "2ebe0ea95fecedd61303fd82ce4b7dc2e7eb1a8e8f5f6820cc9c1f4403adb58b"
+    "metrics_by_station.csv": "fefb6c7ca6f6a8fd7b8b8cf3aa80a4e57818eedd19547060644074952c43c904",
+    "metrics_by_horizon.csv": "a2e8ddb3381cb3e21c5b13fd8ba8f5904a1b2fd70a81008797c4e821e70269d4",
+    "metrics_by_day.csv": "87d07bcc1a18cf98ba23010509f6828ff168694724ba09745cbb6e450329da18",
+    "model_comparisons.csv": "4187d8a71b5b70fae11ab8264f8bd88dfa171c8cad9cc0a0b02b1bbfef234afb",
+    "REPORT.md": "78600f5c94f408bc69566f9df9146ef4d1c9831a13c6744d093d565534336cea"
   }
 }
