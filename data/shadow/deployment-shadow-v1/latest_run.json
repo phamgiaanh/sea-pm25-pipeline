@@ -1,7 +1,7 @@
 {
-  "run_token": "20261029T001744Z_40793060897_1",
-  "issued_at_utc": "2026-10-29T00:17:44.010904Z",
-  "ledger": "data/shadow/deployment-shadow-v1/runs/2026-10-29/20261029T001744Z_40793060897_1.json",
+  "run_token": "20261029T011744Z_40799495571_1",
+  "issued_at_utc": "2026-10-29T01:17:44.006074Z",
+  "ledger": "data/shadow/deployment-shadow-v1/runs/2026-10-29/20261029T011744Z_40799495571_1.json",
   "forecast_count": 480,
   "expected_forecast_count": 576,
   "statuses": [
@@ -12,10 +12,10 @@
       "model_run": "gth10",
       "status": "FORECAST_ISSUED",
       "forecast_count": 24,
-      "origin_time_utc": "2026-10-28T23:00:00Z",
-      "observation_age_hours": 1.2955585844444444,
+      "origin_time_utc": "2026-10-29T00:00:00Z",
+      "observation_age_hours": 1.2955572427777777,
       "coverage_168h": 1.0,
-      "feature_values_sha256": "97371c6f584c2c05e08bb50ecc5d5a490fb3c251ee3d824b42982e85a27fdb0e"
+      "feature_values_sha256": "5d90579c84e280f8ac4099f4db73ded3cc82b1fc30396230fa0d0d6f3fa374bb"
     },
     {
       "station_key": "bangkok_1304207",
@@ -24,10 +24,10 @@
       "model_run": "gsea15/global15",
       "status": "FORECAST_ISSUED",
       "forecast_count": 24,
-      "origin_time_utc": "2026-10-28T23:00:00Z",
-      "observation_age_hours": 1.2955585844444444,
+      "origin_time_utc": "2026-10-29T00:00:00Z",
+      "observation_age_hours": 1.2955572427777777,
       "coverage_168h": 1.0,
-      "feature_values_sha256": "97371c6f584c2c05e08bb50ecc5d5a490fb3c251ee3d824b42982e85a27fdb0e"
+      "feature_values_sha256": "5d90579c84e280f8ac4099f4db73ded3cc82b1fc30396230fa0d0d6f3fa374bb"
     },
     {
       "station_key": "bangkok_1304207",
@@ -36,10 +36,10 @@
       "model_run": "local10",
       "status": "FORECAST_ISSUED",
       "forecast_count": 24,
-      "origin_time_utc": "2026-10-28T23:00:00Z",
-      "observation_age_hours": 1.2955585844444444,
+      "origin_time_utc": "2026-10-29T00:00:00Z",
+      "observation_age_hours": 1.2955572427777777,
       "coverage_168h": 1.0,
-      "feature_values_sha256": "97371c6f584c2c05e08bb50ecc5d5a490fb3c251ee3d824b42982e85a27fdb0e"
+      "feature_values_sha256": "5d90579c84e280f8ac4099f4db73ded3cc82b1fc30396230fa0d0d6f3fa374bb"
     },
     {
       "station_key": "bangkok_1304207",
@@ -48,10 +48,10 @@
       "model_run": "persistence",
       "status": "FORECAST_ISSUED",
       "forecast_count": 24,
-      "origin_time_utc": "2026-10-28T23:00:00Z",
-      "observation_age_hours": 1.2955585844444444,
+      "origin_time_utc": "2026-10-29T00:00:00Z",
+      "observation_age_hours": 1.2955572427777777,
       "coverage_168h": 1.0,
-      "feature_values_sha256": "97371c6f584c2c05e08bb50ecc5d5a490fb3c251ee3d824b42982e85a27fdb0e"
+      "feature_values_sha256": "5d90579c84e280f8ac4099f4db73ded3cc82b1fc30396230fa0d0d6f3fa374bb"
     },
     {
       "station_key": "hanoi_bach_mai_13502154",
@@ -60,10 +60,10 @@
       "model_run": "gth10",
       "status": "FORECAST_ISSUED",
       "forecast_count": 24,
-      "origin_time_utc": "2026-10-29T00:00:00Z",
-      "observation_age_hours": 0.29555858444444444,
+      "origin_time_utc": "2026-10-29T01:00:00Z",
+      "observation_age_hours": 0.2955572427777778,
       "coverage_168h": 1.0,
-      "feature_values_sha256": "e75470dc8c98286c44ab510db07989fa4ec4c973048b9d97b8a7c179c77e070b"
+      "feature_values_sha256": "24143b6870be5428abe3a8db95c48bcb49ca9362f5d19ea1d0250c2832d7fd08"
     },
     {
       "station_key": "hanoi_bach_mai_13502154",
@@ -72,10 +72,10 @@
       "model_run": "gsea15/global15",
       "status": "FORECAST_ISSUED",
       "forecast_count": 24,
-      "origin_time_utc": "2026-10-29T00:00:00Z",
-      "observation_age_hours": 0.29555858444444444,
+      "origin_time_utc": "2026-10-29T01:00:00Z",
+      "observation_age_hours": 0.2955572427777778,
       "coverage_168h": 1.0,
-      "feature_values_sha256": "e75470dc8c98286c44ab510db07989fa4ec4c973048b9d97b8a7c179c77e070b"
+      "feature_values_sha256": "24143b6870be5428abe3a8db95c48bcb49ca9362f5d19ea1d0250c2832d7fd08"
     },
     {
       "station_key": "hanoi_bach_mai_13502154",
@@ -84,10 +84,10 @@
       "model_run": "gsea15/local_target5",
       "status": "FORECAST_ISSUED",
       "forecast_count": 24,
-      "origin_time_utc": "2026-10-29T00:00:00Z",
-      "observation_age_hours": 0.29555858444444444,
+      "origin_time_utc": "2026-10-29T01:00:00Z",
+      "observation_age_hours": 0.2955572427777778,
       "coverage_168h": 1.0,
-      "feature_values_sha256": "e75470dc8c98286c44ab510db07989fa4ec4c973048b9d97b8a7c179c77e070b"
+      "feature_values_sha256": "24143b6870be5428abe3a8db95c48bcb49ca9362f5d19ea1d0250c2832d7fd08"
     },
     {
       "station_key": "hanoi_bach_mai_13502154",
@@ -96,10 +96,10 @@
       "model_run": "persistence",
       "status": "FORECAST_ISSUED",
       "forecast_count": 24,
-      "origin_time_utc": "2026-10-29T00:00:00Z",
-      "observation_age_hours": 0.29555858444444444,
+      "origin_time_utc": "2026-10-29T01:00:00Z",
+      "observation_age_hours": 0.2955572427777778,
       "coverage_168h": 1.0,
-      "feature_values_sha256": "e75470dc8c98286c44ab510db07989fa4ec4c973048b9d97b8a7c179c77e070b"
+      "feature_values_sha256": "24143b6870be5428abe3a8db95c48bcb49ca9362f5d19ea1d0250c2832d7fd08"
     },
     {
       "station_key": "hcmc_cmt8_11357424",
@@ -108,10 +108,10 @@
       "model_run": "gth10",
       "status": "FORECAST_ISSUED",
       "forecast_count": 24,
-      "origin_time_utc": "2026-10-28T23:00:00Z",
-      "observation_age_hours": 1.2955585844444444,
+      "origin_time_utc": "2026-10-29T00:00:00Z",
+      "observation_age_hours": 1.2955572427777777,
       "coverage_168h": 1.0,
-      "feature_values_sha256": "a973325d2ee8b56c708f9d5cec7b4d541e108bd204ae0a6b7451b70abf3b27e3"
+      "feature_values_sha256": "75fc3e918e3574537c61d3cb8bf25a6f7e8da8ea4f9abf12177c736ec8379e65"
     },
     {
       "station_key": "hcmc_cmt8_11357424",
@@ -120,10 +120,10 @@
       "model_run": "gsea15/global15",
       "status": "FORECAST_ISSUED",
       "forecast_count": 24,
-      "origin_time_utc": "2026-10-28T23:00:00Z",
-      "observation_age_hours": 1.2955585844444444,
+      "origin_time_utc": "2026-10-29T00:00:00Z",
+      "observation_age_hours": 1.2955572427777777,
       "coverage_168h": 1.0,
-      "feature_values_sha256": "a973325d2ee8b56c708f9d5cec7b4d541e108bd204ae0a6b7451b70abf3b27e3"
+      "feature_values_sha256": "75fc3e918e3574537c61d3cb8bf25a6f7e8da8ea4f9abf12177c736ec8379e65"
     },
     {
       "station_key": "hcmc_cmt8_11357424",
@@ -132,10 +132,10 @@
       "model_run": "gsea15/local_target5",
       "status": "FORECAST_ISSUED",
       "forecast_count": 24,
-      "origin_time_utc": "2026-10-28T23:00:00Z",
-      "observation_age_hours": 1.2955585844444444,
+      "origin_time_utc": "2026-10-29T00:00:00Z",
+      "observation_age_hours": 1.2955572427777777,
       "coverage_168h": 1.0,
-      "feature_values_sha256": "a973325d2ee8b56c708f9d5cec7b4d541e108bd204ae0a6b7451b70abf3b27e3"
+      "feature_values_sha256": "75fc3e918e3574537c61d3cb8bf25a6f7e8da8ea4f9abf12177c736ec8379e65"
     },
     {
       "station_key": "hcmc_cmt8_11357424",
@@ -144,10 +144,10 @@
       "model_run": "persistence",
       "status": "FORECAST_ISSUED",
       "forecast_count": 24,
-      "origin_time_utc": "2026-10-28T23:00:00Z",
-      "observation_age_hours": 1.2955585844444444,
+      "origin_time_utc": "2026-10-29T00:00:00Z",
+      "observation_age_hours": 1.2955572427777777,
       "coverage_168h": 1.0,
-      "feature_values_sha256": "a973325d2ee8b56c708f9d5cec7b4d541e108bd204ae0a6b7451b70abf3b27e3"
+      "feature_values_sha256": "75fc3e918e3574537c61d3cb8bf25a6f7e8da8ea4f9abf12177c736ec8379e65"
     },
     {
       "station_key": "kuala_lumpur_setia_12178404",
@@ -156,10 +156,10 @@
       "model_run": "gth10",
       "status": "FORECAST_ISSUED",
       "forecast_count": 24,
-      "origin_time_utc": "2026-10-29T00:00:00Z",
-      "observation_age_hours": 0.29555858444444444,
+      "origin_time_utc": "2026-10-29T01:00:00Z",
+      "observation_age_hours": 0.2955572427777778,
       "coverage_168h": 1.0,
-      "feature_values_sha256": "e53c4c3a42ae5c3e1db3d35fe2d0451abf24ad31c1f75d29d088815460248c0f"
+      "feature_values_sha256": "c9ed0bbb23e6e5c8be1ba6881d555edc15ea7521efea7969e735278a1ea98aa6"
     },
     {
       "station_key": "kuala_lumpur_setia_12178404",
@@ -168,10 +168,10 @@
       "model_run": "gsea15/global15",
       "status": "FORECAST_ISSUED",
       "forecast_count": 24,
-      "origin_time_utc": "2026-10-29T00:00:00Z",
-      "observation_age_hours": 0.29555858444444444,
+      "origin_time_utc": "2026-10-29T01:00:00Z",
+      "observation_age_hours": 0.2955572427777778,
       "coverage_168h": 1.0,
-      "feature_values_sha256": "e53c4c3a42ae5c3e1db3d35fe2d0451abf24ad31c1f75d29d088815460248c0f"
+      "feature_values_sha256": "c9ed0bbb23e6e5c8be1ba6881d555edc15ea7521efea7969e735278a1ea98aa6"
     },
     {
       "station_key": "kuala_lumpur_setia_12178404",
@@ -180,10 +180,10 @@
       "model_run": "gsea15/local_target5",
       "status": "FORECAST_ISSUED",
       "forecast_count": 24,
-      "origin_time_utc": "2026-10-29T00:00:00Z",
-      "observation_age_hours": 0.29555858444444444,
+      "origin_time_utc": "2026-10-29T01:00:00Z",
+      "observation_age_hours": 0.2955572427777778,
       "coverage_168h": 1.0,
-      "feature_values_sha256": "e53c4c3a42ae5c3e1db3d35fe2d0451abf24ad31c1f75d29d088815460248c0f"
+      "feature_values_sha256": "c9ed0bbb23e6e5c8be1ba6881d555edc15ea7521efea7969e735278a1ea98aa6"
     },
     {
       "station_key": "kuala_lumpur_setia_12178404",
@@ -192,10 +192,10 @@
       "model_run": "persistence",
       "status": "FORECAST_ISSUED",
       "forecast_count": 24,
-      "origin_time_utc": "2026-10-29T00:00:00Z",
-      "observation_age_hours": 0.29555858444444444,
+      "origin_time_utc": "2026-10-29T01:00:00Z",
+      "observation_age_hours": 0.2955572427777778,
       "coverage_168h": 1.0,
-      "feature_values_sha256": "e53c4c3a42ae5c3e1db3d35fe2d0451abf24ad31c1f75d29d088815460248c0f"
+      "feature_values_sha256": "c9ed0bbb23e6e5c8be1ba6881d555edc15ea7521efea7969e735278a1ea98aa6"
     },
     {
       "station_key": "vientiane_unicef_12714979",
@@ -204,10 +204,10 @@
       "model_run": "gth10",
       "status": "FORECAST_ISSUED",
       "forecast_count": 24,
-      "origin_time_utc": "2026-10-28T23:00:00Z",
-      "observation_age_hours": 1.2955585844444444,
+      "origin_time_utc": "2026-10-29T00:00:00Z",
+      "observation_age_hours": 1.2955572427777777,
       "coverage_168h": 1.0,
-      "feature_values_sha256": "a9cbcd6cdc95ac8ef666c00589347a891c663647bddd63bca091016fa7347402"
+      "feature_values_sha256": "a1b93639a99860de4852b14fc11deee58b2f3e5263e41e8640843fd0f6c4107b"
     },
     {
       "station_key": "vientiane_unicef_12714979",
@@ -216,10 +216,10 @@
       "model_run": "gsea15/global15",
       "status": "FORECAST_ISSUED",
       "forecast_count": 24,
-      "origin_time_utc": "2026-10-28T23:00:00Z",
-      "observation_age_hours": 1.2955585844444444,
+      "origin_time_utc": "2026-10-29T00:00:00Z",
+      "observation_age_hours": 1.2955572427777777,
       "coverage_168h": 1.0,
-      "feature_values_sha256": "a9cbcd6cdc95ac8ef666c00589347a891c663647bddd63bca091016fa7347402"
+      "feature_values_sha256": "a1b93639a99860de4852b14fc11deee58b2f3e5263e41e8640843fd0f6c4107b"
     },
     {
       "station_key": "vientiane_unicef_12714979",
@@ -228,10 +228,10 @@
       "model_run": "gsea15/local_target5",
       "status": "FORECAST_ISSUED",
       "forecast_count": 24,
-      "origin_time_utc": "2026-10-28T23:00:00Z",
-      "observation_age_hours": 1.2955585844444444,
+      "origin_time_utc": "2026-10-29T00:00:00Z",
+      "observation_age_hours": 1.2955572427777777,
       "coverage_168h": 1.0,
-      "feature_values_sha256": "a9cbcd6cdc95ac8ef666c00589347a891c663647bddd63bca091016fa7347402"
+      "feature_values_sha256": "a1b93639a99860de4852b14fc11deee58b2f3e5263e41e8640843fd0f6c4107b"
     },
     {
       "station_key": "vientiane_unicef_12714979",
@@ -240,10 +240,10 @@
       "model_run": "persistence",
       "status": "FORECAST_ISSUED",
       "forecast_count": 24,
-      "origin_time_utc": "2026-10-28T23:00:00Z",
-      "observation_age_hours": 1.2955585844444444,
+      "origin_time_utc": "2026-10-29T00:00:00Z",
+      "observation_age_hours": 1.2955572427777777,
       "coverage_168h": 1.0,
-      "feature_values_sha256": "a9cbcd6cdc95ac8ef666c00589347a891c663647bddd63bca091016fa7347402"
+      "feature_values_sha256": "a1b93639a99860de4852b14fc11deee58b2f3e5263e41e8640843fd0f6c4107b"
     },
     {
       "station_key": "yangon_airgradient_14198580",
