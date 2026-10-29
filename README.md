@@ -346,3 +346,31 @@ The primary comparison remains the five fixed deployment targets; the five new
 stations form a secondary diagnostic cohort. Training membership does not alter
 `serve_v1.csv` or the API routing configuration, and no new station is promoted
 without live-readiness plus post-cutoff shadow evidence.
+
+### Corrected full-history benchmark
+
+The original G-SEA15/G-SEA20 feature snapshots are retained as provisional
+artifacts. A data audit found that feature construction had reapplied legacy
+registry `collect_to_utc` values after collection had intentionally been
+extended to 2026, excluding 74,668 otherwise valid observation origins. The
+corrected builder treats the hashed processed observation snapshot as the
+authoritative input and asserts a one-to-one mapping from valid observations to
+feature origins.
+
+The corrected snapshots and synchronized 2026 benchmark are reproduced with:
+
+```bash
+make reproduce-fixed-benchmark
+```
+
+This creates new `v2` snapshots without overwriting `v1`, then retrains
+Global3, Global5, G-TH10, G-SEA15, G-SEA20 and Local LightGBM under the same
+feature, horizon, temporal-split and evaluation-row contract. The active API,
+SERVE_V1 registry and shadow campaign remain unchanged.
+
+Each new modelling snapshot also freezes `station_registry.csv` and
+`experiment.json` beside `features.csv.gz`. Training reads cohort membership
+from that frozen registry and hashes only the stations participating in the
+run. Consequently, appending an unrelated station to the project-level
+registry does not invalidate or silently change an older experiment. Use the
+snapshot's `experiment.json` when reproducing a frozen run.

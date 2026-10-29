@@ -39,6 +39,11 @@ def main() -> None:
                 "--collect-until",
                 help="optional UTC snapshot cutoff; may extend a legacy registry collection end",
             )
+        if name == "build-features":
+            command.add_argument(
+                "--source-snapshot",
+                help="optional immutable processed observation/weather snapshot used to build a new feature snapshot",
+            )
     train = subparsers.add_parser("train")
     train.add_argument("--snapshot", required=True)
     train.add_argument("--run", required=True)
@@ -83,6 +88,15 @@ def main() -> None:
     gsea20_evaluation.add_argument("--eval-cohort", default="gsea20_eval10")
     gsea20_evaluation.add_argument("--target-cohort", default="gsea20_target5")
     gsea20_evaluation.add_argument("--new-cohort", default="gsea20_new5")
+    benchmark = subparsers.add_parser("evaluate-fixed-benchmark")
+    benchmark.add_argument("--report", required=True)
+    benchmark.add_argument("--global3-run", required=True)
+    benchmark.add_argument("--global5-run", required=True)
+    benchmark.add_argument("--gth10-run", required=True)
+    benchmark.add_argument("--gsea15-run", required=True)
+    benchmark.add_argument("--gsea20-run", required=True)
+    benchmark.add_argument("--local-run", required=True)
+    benchmark.add_argument("--eval-cohort", default="gsea20_target5")
     balanced = subparsers.add_parser("train-balanced-gsea15")
     balanced.add_argument("--snapshot", required=True)
     balanced.add_argument("--output-run", required=True)
@@ -183,7 +197,11 @@ def main() -> None:
         from .features import build_features
 
         result = build_features(
-            data_stations, experiment, args.snapshot, root / "data" / "processed"
+            data_stations,
+            experiment,
+            args.snapshot,
+            root / "data" / "processed",
+            args.source_snapshot,
         )
     elif args.command == "train":
         from .train import train_run
@@ -242,6 +260,7 @@ def main() -> None:
 
         result = compose_feature_snapshot(
             stations,
+            experiment,
             root / "data" / "processed",
             args.snapshot,
             args.source_snapshot,
@@ -289,6 +308,24 @@ def main() -> None:
             args.eval_cohort,
             args.target_cohort,
             args.new_cohort,
+        )
+    elif args.command == "evaluate-fixed-benchmark":
+        from .benchmark import evaluate_fixed_benchmark
+
+        result = evaluate_fixed_benchmark(
+            stations,
+            experiment,
+            root / "artifacts",
+            args.report,
+            {
+                "GLOBAL3_2026": args.global3_run,
+                "GLOBAL5_2026": args.global5_run,
+                "GTH10_2026": args.gth10_run,
+                "GSEA15_2026": args.gsea15_run,
+                "GSEA20_2026": args.gsea20_run,
+            },
+            args.local_run,
+            args.eval_cohort,
         )
     elif args.command == "train-balanced-gsea15":
         from .balanced import train_balanced_gsea15

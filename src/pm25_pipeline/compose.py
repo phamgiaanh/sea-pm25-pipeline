@@ -6,12 +6,14 @@ from pathlib import Path
 
 import pandas as pd
 
-from .config import Station, stations_digest
+from .config import Station, station_subset, station_subset_digest
 from .hashing import DETERMINISTIC_GZIP, sha256_file
+from .provenance import freeze_snapshot_context
 
 
 def compose_feature_snapshot(
     stations: list[Station],
+    experiment: dict,
     processed_root: Path,
     snapshot: str,
     source_snapshots: list[str],
@@ -104,6 +106,8 @@ def compose_feature_snapshot(
     combined = combined.sort_values(keys, kind="mergesort").reset_index(drop=True)
 
     output_dir.mkdir(parents=True)
+    snapshot_stations = station_subset(stations, required)
+    snapshot_context = freeze_snapshot_context(output_dir, snapshot_stations, experiment)
     features_output = output_dir / "features.csv.gz"
     combined.to_csv(features_output, index=False, compression=DETERMINISTIC_GZIP)
     source_template = deepcopy(manifests[0][2])
@@ -112,6 +116,15 @@ def compose_feature_snapshot(
         "weather_sha256",
         "station_config_sha256",
         "experiment_config_sha256",
+        "valid_observation_origin_rows",
+        "observation_to_feature_origin_rows_equal",
+        "source_processed_snapshot",
+        "source_observations_manifest_sha256",
+        "source_weather_manifest_sha256",
+        "station_registry_file",
+        "station_registry_sha256",
+        "experiment_file",
+        "experiment_snapshot_sha256",
     ):
         source_template.pop(key, None)
     source_template.update(
@@ -121,7 +134,7 @@ def compose_feature_snapshot(
             "rows": int(len(combined)),
             "stations": sorted(required),
             "features_sha256": sha256_file(features_output),
-            "station_config_sha256": stations_digest(stations),
+            **snapshot_context,
             "source_feature_manifests": {
                 record["snapshot"]: record["feature_manifest_sha256"]
                 for record in source_records
@@ -136,7 +149,10 @@ def compose_feature_snapshot(
     composition = {
         "snapshot": snapshot,
         "cohort": cohort,
-        "station_config_sha256": stations_digest(stations),
+        "station_config_sha256": station_subset_digest(snapshot_stations, required),
+        "station_registry_sha256": snapshot_context["station_registry_sha256"],
+        "experiment_config_sha256": snapshot_context["experiment_config_sha256"],
+        "experiment_snapshot_sha256": snapshot_context["experiment_snapshot_sha256"],
         "station_source": dict(sorted(assignment.items())),
         "sources": source_records,
         "output": {

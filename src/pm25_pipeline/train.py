@@ -8,9 +8,10 @@ import lightgbm as lgb
 import numpy as np
 import pandas as pd
 
-from .config import Station, experiment_digest, stations_digest
+from .config import Station, experiment_digest, station_subset_digest
 from .features import feature_columns
 from .hashing import DETERMINISTIC_GZIP, sha256_file
+from .provenance import load_snapshot_context
 
 
 def _metric_rows(run: str, model: str, horizon: int, predictions: pd.DataFrame) -> list[dict]:
@@ -121,11 +122,15 @@ def train_run(
     feature_set: str | None = None,
     horizons: list[int] | None = None,
 ) -> Path:
-    features_path = processed_root / snapshot / "features.csv.gz"
+    snapshot_dir = processed_root / snapshot
+    snapshot_stations, snapshot_context = load_snapshot_context(
+        snapshot_dir, stations, experiment
+    )
+    features_path = snapshot_dir / "features.csv.gz"
     frame = pd.read_csv(features_path, compression="gzip")
     frame["origin_time_utc"] = pd.to_datetime(frame["origin_time_utc"], utc=True)
-    train_stations = {s.station_key for s in stations if train_cohort in s.cohorts}
-    eval_stations = {s.station_key for s in stations if eval_cohort in s.cohorts}
+    train_stations = {s.station_key for s in snapshot_stations if train_cohort in s.cohorts}
+    eval_stations = {s.station_key for s in snapshot_stations if eval_cohort in s.cohorts}
     if not train_stations or not eval_stations:
         raise ValueError("train and evaluation cohorts must both contain stations")
     available = set(frame["station_key"])
@@ -215,7 +220,12 @@ def train_run(
         "feature_columns": columns,
         "horizons": selected_horizons,
         "features_sha256": sha256_file(features_path),
-        "station_config_sha256": stations_digest(stations),
+        "station_config_sha256": station_subset_digest(
+            snapshot_stations, train_stations | eval_stations
+        ),
+        "snapshot_station_registry_sha256": (
+            snapshot_context["station_registry_sha256"] if snapshot_context else None
+        ),
         "experiment_config_sha256": experiment_digest(experiment),
         "predictions_sha256": sha256_file(predictions_path),
         "metrics_sha256": sha256_file(metrics_path),
@@ -252,10 +262,14 @@ def train_local_run(
     2023 early-stopping selection with at most 95 rounds and patience 12, then
     a train+validation refit before the 2024 historical evaluation.
     """
-    features_path = processed_root / snapshot / "features.csv.gz"
+    snapshot_dir = processed_root / snapshot
+    snapshot_stations, snapshot_context = load_snapshot_context(
+        snapshot_dir, stations, experiment
+    )
+    features_path = snapshot_dir / "features.csv.gz"
     frame = pd.read_csv(features_path, compression="gzip")
     frame["origin_time_utc"] = pd.to_datetime(frame["origin_time_utc"], utc=True)
-    local_stations = sorted(s.station_key for s in stations if cohort in s.cohorts)
+    local_stations = sorted(s.station_key for s in snapshot_stations if cohort in s.cohorts)
     if not local_stations:
         raise ValueError("local cohort must contain at least one station")
     available = set(frame["station_key"])
@@ -372,7 +386,12 @@ def train_local_run(
         "num_boost_round": int(local_config["num_boost_round"]),
         "early_stopping_rounds": int(local_config["early_stopping_rounds"]),
         "features_sha256": sha256_file(features_path),
-        "station_config_sha256": stations_digest(stations),
+        "station_config_sha256": station_subset_digest(
+            snapshot_stations, set(local_stations)
+        ),
+        "snapshot_station_registry_sha256": (
+            snapshot_context["station_registry_sha256"] if snapshot_context else None
+        ),
         "experiment_config_sha256": experiment_digest(experiment),
         "predictions_sha256": sha256_file(predictions_path),
         "metrics_sha256": sha256_file(metrics_path),

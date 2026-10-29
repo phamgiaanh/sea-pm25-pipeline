@@ -21,6 +21,7 @@ from pm25_pipeline.config import (
     load_stations,
     override_collection_window,
     select_stations,
+    station_subset_digest,
 )
 from pm25_pipeline.evaluation import evaluate_gsea15, evaluate_station_expansion
 from pm25_pipeline.features import _station_features, feature_columns
@@ -158,6 +159,11 @@ class PipelineTests(unittest.TestCase):
                 "weather_alignment": "test",
                 "weather_missing_policy": {"mode": "test"},
                 "altitude_definition": "test",
+                "valid_observation_origin_rows": 999,
+                "observation_to_feature_origin_rows_equal": True,
+                "source_processed_snapshot": "source-only",
+                "source_observations_manifest_sha256": "source-only",
+                "source_weather_manifest_sha256": "source-only",
             }
             for source, rows in (
                 ("first", [("a", 1.0)]),
@@ -188,12 +194,35 @@ class PipelineTests(unittest.TestCase):
                     json.dumps(manifest), encoding="utf-8"
                 )
             output = compose_feature_snapshot(
-                stations, root, "combined", ["first", "second"], "combined"
+                stations,
+                FEATURE_CONFIG,
+                root,
+                "combined",
+                ["first", "second"],
+                "combined",
             )
             combined = pd.read_csv(output)
             self.assertEqual(dict(zip(combined["station_key"], combined["value"])), {"a": 1.0, "b": 2.0})
             provenance = json.loads((root / "combined" / "composition_manifest.json").read_text())
             self.assertEqual(provenance["station_source"], {"a": "first", "b": "second"})
+            output_manifest = json.loads((root / "combined" / "feature_manifest.json").read_text())
+            for source_only_field in (
+                "valid_observation_origin_rows",
+                "observation_to_feature_origin_rows_equal",
+                "source_processed_snapshot",
+                "source_observations_manifest_sha256",
+                "source_weather_manifest_sha256",
+            ):
+                self.assertNotIn(source_only_field, output_manifest)
+            self.assertTrue((root / "combined" / "station_registry.csv").is_file())
+            self.assertTrue((root / "combined" / "experiment.json").is_file())
+
+    def test_station_subset_digest_ignores_unrelated_registry_additions(self):
+        relevant = replace(STATION, station_key="relevant")
+        unrelated = replace(STATION, station_key="unrelated", sensor_id=99)
+        expected = station_subset_digest([relevant], {"relevant"})
+        actual = station_subset_digest([unrelated, relevant], {"relevant"})
+        self.assertEqual(actual, expected)
 
     def test_station_balanced_weights_give_each_station_equal_total(self):
         frame = pd.DataFrame(
@@ -866,6 +895,23 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(frame.iloc[0]["target_h30"], 30)
         self.assertTrue(pd.isna(last["target_h30"]))
 
+    def test_features_trust_versioned_observations_beyond_registry_default_end(self):
+        station = replace(
+            STATION,
+            collect_to_utc="2024-01-02T00:00:00Z",
+        )
+        times = pd.date_range("2024-01-03T00:00:00Z", periods=4, freq="h")
+        raw = pd.DataFrame({"interval_end_utc": times, "pm25_ug_m3": [1, 2, 3, 4]})
+        experiment = {
+            **FEATURE_CONFIG,
+            "lags_hours": [0, 1],
+            "rolling_hours": [3],
+            "horizons_hours": [1],
+        }
+        frame = _station_features(raw, station, experiment)
+        self.assertEqual(len(frame), len(raw))
+        self.assertEqual(frame["pm25"].tolist(), [1, 2, 3, 4])
+
     def test_weather_build_derives_wind_components(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -992,6 +1038,18 @@ class PipelineTests(unittest.TestCase):
                 }
             )
             observations.to_csv(output / "observations.csv.gz", index=False, compression="gzip")
+            observations_path = output / "observations.csv.gz"
+            (output / "observations_manifest.json").write_text(
+                json.dumps(
+                    {
+                        "snapshot": snapshot,
+                        "observations_sha256": sha256_file(observations_path),
+                        "rows": len(observations),
+                        "stations": [STATION.station_key],
+                    }
+                ),
+                encoding="utf-8",
+            )
             weather = pd.DataFrame(
                 {
                     "station_key": STATION.station_key,
@@ -1012,6 +1070,18 @@ class PipelineTests(unittest.TestCase):
             weather.loc[synthetic_missing, "temperature_2m_missing"] = 1
             weather.loc[synthetic_missing, "weather_age_hours"] = np.nan
             weather.to_csv(output / "weather.csv.gz", index=False, compression="gzip")
+            weather_path = output / "weather.csv.gz"
+            (output / "weather_manifest.json").write_text(
+                json.dumps(
+                    {
+                        "snapshot": snapshot,
+                        "weather_sha256": sha256_file(weather_path),
+                        "rows": len(weather),
+                        "stations": [STATION.station_key],
+                    }
+                ),
+                encoding="utf-8",
+            )
             experiment = {
                 **FEATURE_CONFIG,
                 "seed": 7,
@@ -1041,10 +1111,31 @@ class PipelineTests(unittest.TestCase):
                 },
             }
             build_features([smoke_station], experiment, snapshot, processed)
+            self.assertTrue((output / "station_registry.csv").is_file())
+            self.assertTrue((output / "experiment.json").is_file())
+            unrelated_station = replace(
+                smoke_station,
+                station_key="unrelated_station",
+                cohorts=("future_cohort",),
+                sensor_id=100,
+            )
             run_dir = train_run(
-                [smoke_station], experiment, snapshot, processed, root / "artifacts", "smoke", "core5", "core5"
+                [smoke_station, unrelated_station],
+                experiment,
+                snapshot,
+                processed,
+                root / "artifacts",
+                "smoke",
+                "core5",
+                "core5",
             )
             self.assertTrue((run_dir / "models" / "h01.txt").is_file())
+            run_manifest = json.loads((run_dir / "run_manifest.json").read_text())
+            frozen_stations = load_stations(output / "station_registry.csv")
+            self.assertEqual(
+                run_manifest["station_config_sha256"],
+                station_subset_digest(frozen_stations, {smoke_station.station_key}),
+            )
             with self.assertRaises(FileExistsError):
                 train_run(
                     [smoke_station],

@@ -21,12 +21,17 @@ GSEA20_SNAPSHOT ?= gsea20-2019-2026-v1
 GSEA20_BASELINE_RUN ?= gsea20/gsea15_frozen
 GSEA20_GLOBAL_RUN ?= gsea20/global20
 GSEA20_REPORT ?= gsea20-v1
+FIXED_GSEA15_SNAPSHOT ?= gsea15-2019-2026-v2
+FIXED_GSEA20_SNAPSHOT ?= gsea20-2019-2026-v2
+FIXED_BENCHMARK_PREFIX ?= fixed2026-v2
+FIXED_BENCHMARK_REPORT ?= fixed2026-v2
+FIXED_EXPERIMENT ?= data/processed/$(FIXED_GSEA20_SNAPSHOT)/experiment.json
 API_CONFIG ?= config/api_deployment.json
 API_HOST ?= 127.0.0.1
 API_PORT ?= 8000
 PYTHONPATH := src
 
-.PHONY: collect collect-weather data weather-data features export-csv screen-features train local reproduce reproduce-gth10 report-gth10 collect-gsea15 prepare-gsea15 train-gsea15 report-gsea15 reproduce-gsea15 reproduce-gsea15-balanced compose-gsea20 train-gsea20 report-gsea20 reproduce-gsea20 audit-live evaluate-serve-v1 prepare-serve-candidates evaluate-serve-candidates-v2 audit-serve-candidates-v2 propose-serve-v2 shadow-issue shadow-score shadow-report serve test
+.PHONY: collect collect-weather data weather-data features export-csv screen-features train local reproduce reproduce-gth10 report-gth10 collect-gsea15 prepare-gsea15 train-gsea15 report-gsea15 reproduce-gsea15 reproduce-gsea15-balanced compose-gsea20 train-gsea20 report-gsea20 reproduce-gsea20 build-fixed-data train-fixed-benchmark report-fixed-benchmark reproduce-fixed-benchmark audit-live evaluate-serve-v1 prepare-serve-candidates evaluate-serve-candidates-v2 audit-serve-candidates-v2 propose-serve-v2 shadow-issue shadow-score shadow-report serve test
 
 collect:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pm25_pipeline collect --snapshot $(SNAPSHOT) --cohort $(COHORT)
@@ -108,6 +113,23 @@ report-gsea20:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pm25_pipeline --experiment $(GSEA15_EXPERIMENT) evaluate-gsea20 --report $(GSEA20_REPORT) --baseline-run $(GSEA20_BASELINE_RUN) --expanded-run $(GSEA20_GLOBAL_RUN) --eval-cohort gsea20_eval10 --target-cohort gsea20_target5 --new-cohort gsea20_new5
 
 reproduce-gsea20: compose-gsea20 train-gsea20 report-gsea20
+
+build-fixed-data:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pm25_pipeline --experiment $(GSEA15_EXPERIMENT) build-features --snapshot $(FIXED_GSEA15_SNAPSHOT) --source-snapshot $(GSEA15_SNAPSHOT) --cohort gsea15
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pm25_pipeline --experiment $(GSEA15_EXPERIMENT) compose-snapshot --snapshot $(FIXED_GSEA20_SNAPSHOT) --source-snapshot $(FIXED_GSEA15_SNAPSHOT) --source-snapshot $(CANDIDATE_SNAPSHOT) --cohort gsea20
+
+train-fixed-benchmark:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pm25_pipeline --experiment $(FIXED_EXPERIMENT) train --snapshot $(FIXED_GSEA20_SNAPSHOT) --run $(FIXED_BENCHMARK_PREFIX)/global3 --train-cohort core3 --eval-cohort gsea20_target5 --feature-set pm25_weather_calendar_altitude
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pm25_pipeline --experiment $(FIXED_EXPERIMENT) train --snapshot $(FIXED_GSEA20_SNAPSHOT) --run $(FIXED_BENCHMARK_PREFIX)/global5 --train-cohort core5 --eval-cohort gsea20_target5 --feature-set pm25_weather_calendar_altitude
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pm25_pipeline --experiment $(FIXED_EXPERIMENT) train --snapshot $(FIXED_GSEA20_SNAPSHOT) --run $(FIXED_BENCHMARK_PREFIX)/gth10 --train-cohort gth10 --eval-cohort gsea20_target5 --feature-set pm25_weather_calendar_altitude
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pm25_pipeline --experiment $(FIXED_EXPERIMENT) train --snapshot $(FIXED_GSEA20_SNAPSHOT) --run $(FIXED_BENCHMARK_PREFIX)/gsea15 --train-cohort gsea15 --eval-cohort gsea20_target5 --feature-set pm25_weather_calendar_altitude
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pm25_pipeline --experiment $(FIXED_EXPERIMENT) train --snapshot $(FIXED_GSEA20_SNAPSHOT) --run $(FIXED_BENCHMARK_PREFIX)/gsea20 --train-cohort gsea20 --eval-cohort gsea20_target5 --feature-set pm25_weather_calendar_altitude
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pm25_pipeline --experiment $(FIXED_EXPERIMENT) train-local --snapshot $(FIXED_GSEA20_SNAPSHOT) --run $(FIXED_BENCHMARK_PREFIX)/local_target5 --cohort gsea20_target5 --feature-set pm25_weather_calendar_altitude
+
+report-fixed-benchmark:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pm25_pipeline --experiment $(FIXED_EXPERIMENT) evaluate-fixed-benchmark --report $(FIXED_BENCHMARK_REPORT) --global3-run $(FIXED_BENCHMARK_PREFIX)/global3 --global5-run $(FIXED_BENCHMARK_PREFIX)/global5 --gth10-run $(FIXED_BENCHMARK_PREFIX)/gth10 --gsea15-run $(FIXED_BENCHMARK_PREFIX)/gsea15 --gsea20-run $(FIXED_BENCHMARK_PREFIX)/gsea20 --local-run $(FIXED_BENCHMARK_PREFIX)/local_target5 --eval-cohort gsea20_target5
+
+reproduce-fixed-benchmark: build-fixed-data train-fixed-benchmark report-fixed-benchmark
 
 audit-live:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pm25_pipeline audit-live --audit-id $(AUDIT) --cohort gth10 --lookback-days 14

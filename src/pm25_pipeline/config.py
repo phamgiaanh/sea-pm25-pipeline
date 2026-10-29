@@ -215,6 +215,25 @@ def stations_digest(stations: list[Station]) -> str:
     return hashlib.sha256(payload).hexdigest()
 
 
+def station_subset(stations: list[Station], station_keys: set[str] | list[str]) -> list[Station]:
+    """Return an exact, deterministically ordered station-registry subset."""
+    requested = set(station_keys)
+    by_key = {station.station_key: station for station in stations}
+    missing = requested - set(by_key)
+    if missing:
+        raise ValueError(f"station registry is missing keys: {sorted(missing)}")
+    return [by_key[key] for key in sorted(requested)]
+
+
+def station_subset_digest(stations: list[Station], station_keys: set[str] | list[str]) -> str:
+    """Hash only the stations that materially participate in one artifact.
+
+    Unrelated registry additions must not invalidate an older cohort or model.
+    Sorting also makes the digest independent of CSV row order.
+    """
+    return stations_digest(station_subset(stations, station_keys))
+
+
 def experiment_digest(experiment: dict) -> str:
     payload = json.dumps(experiment, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
     return hashlib.sha256(payload).hexdigest()
