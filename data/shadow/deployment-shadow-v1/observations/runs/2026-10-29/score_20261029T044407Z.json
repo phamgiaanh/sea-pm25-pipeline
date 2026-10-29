@@ -1,0 +1,1302 @@
+{
+  "schema_version": 1,
+  "campaign_id": "deployment-shadow-v1",
+  "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+  "source_evidence": [
+    {
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "sha256": "cc8ea07d2c1c9f3458c07db8e3b01b74bdb66adb8c6496914028c0d56f31cb2d",
+      "valid_truth_rows": 145,
+      "path": "runtime/shadow_evidence/score_20261029T044407Z/bangkok_1304207/openaq_truth.json"
+    },
+    {
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "sha256": "f5c1048f6a2f4d01edbdfeabf45afffff1d7fea476a050e687938eeab044c690",
+      "valid_truth_rows": 145,
+      "path": "runtime/shadow_evidence/score_20261029T044407Z/hanoi_bach_mai_13502154/openaq_truth.json"
+    },
+    {
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "sha256": "7f19c797a57694b062f1f803e457a119a780f9386ed9457b4f169c9d341055c5",
+      "valid_truth_rows": 145,
+      "path": "runtime/shadow_evidence/score_20261029T044407Z/hcmc_cmt8_11357424/openaq_truth.json"
+    },
+    {
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "sha256": "cc9258311915831ded5572d8efc1e3f8bf97ef0f378cadf7896e07fe0142d477",
+      "valid_truth_rows": 145,
+      "path": "runtime/shadow_evidence/score_20261029T044407Z/kuala_lumpur_setia_12178404/openaq_truth.json"
+    },
+    {
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "sha256": "2e91a47438de436f01ab50be509c075e01cef31f67f46247df2370e1032171f6",
+      "valid_truth_rows": 145,
+      "path": "runtime/shadow_evidence/score_20261029T044407Z/vientiane_unicef_12714979/openaq_truth.json"
+    },
+    {
+      "station_key": "yangon_airgradient_14198580",
+      "sensor_id": 14198580,
+      "sha256": "98db5871c35fd8e3b01ab24edafa793bf7bcf8770c6570a72c90aebf5770c18c",
+      "valid_truth_rows": 140,
+      "path": "runtime/shadow_evidence/score_20261029T044407Z/yangon_airgradient_14198580/openaq_truth.json"
+    }
+  ],
+  "observations": [
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-27T17:00:00Z",
+      "observed_pm25_ug_m3": 13.0,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-27T17:00:00Z",
+      "observed_pm25_ug_m3": 62.6,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-27T17:00:00Z",
+      "observed_pm25_ug_m3": 30.6,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-27T17:00:00Z",
+      "observed_pm25_ug_m3": 7.3,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-27T17:00:00Z",
+      "observed_pm25_ug_m3": 26.4,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-27T18:00:00Z",
+      "observed_pm25_ug_m3": 12.9,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-27T18:00:00Z",
+      "observed_pm25_ug_m3": 44.5,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-27T18:00:00Z",
+      "observed_pm25_ug_m3": 28.1,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-27T18:00:00Z",
+      "observed_pm25_ug_m3": 7.8,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-27T18:00:00Z",
+      "observed_pm25_ug_m3": 27.7,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "yangon_airgradient_14198580",
+      "sensor_id": 14198580,
+      "target_time_utc": "2026-10-27T17:30:00Z",
+      "observed_pm25_ug_m3": 26.5,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-27T19:00:00Z",
+      "observed_pm25_ug_m3": 12.9,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-27T19:00:00Z",
+      "observed_pm25_ug_m3": 20.8,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-27T19:00:00Z",
+      "observed_pm25_ug_m3": 22.8,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-27T19:00:00Z",
+      "observed_pm25_ug_m3": 8.4,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-27T19:00:00Z",
+      "observed_pm25_ug_m3": 31.3,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "yangon_airgradient_14198580",
+      "sensor_id": 14198580,
+      "target_time_utc": "2026-10-27T18:30:00Z",
+      "observed_pm25_ug_m3": 29.0,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-27T20:00:00Z",
+      "observed_pm25_ug_m3": 13.0,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-27T20:00:00Z",
+      "observed_pm25_ug_m3": 21.2,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-27T20:00:00Z",
+      "observed_pm25_ug_m3": 20.4,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-27T20:00:00Z",
+      "observed_pm25_ug_m3": 15.1,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-27T20:00:00Z",
+      "observed_pm25_ug_m3": 34.3,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "yangon_airgradient_14198580",
+      "sensor_id": 14198580,
+      "target_time_utc": "2026-10-27T19:30:00Z",
+      "observed_pm25_ug_m3": 28.5,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-27T21:00:00Z",
+      "observed_pm25_ug_m3": 13.4,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-27T21:00:00Z",
+      "observed_pm25_ug_m3": 52.2,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-27T21:00:00Z",
+      "observed_pm25_ug_m3": 21.7,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-27T21:00:00Z",
+      "observed_pm25_ug_m3": 21.8,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-27T21:00:00Z",
+      "observed_pm25_ug_m3": 35.6,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "yangon_airgradient_14198580",
+      "sensor_id": 14198580,
+      "target_time_utc": "2026-10-27T20:30:00Z",
+      "observed_pm25_ug_m3": 39.5,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-27T22:00:00Z",
+      "observed_pm25_ug_m3": 13.7,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-27T22:00:00Z",
+      "observed_pm25_ug_m3": 71.4,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-27T22:00:00Z",
+      "observed_pm25_ug_m3": 22.2,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-27T22:00:00Z",
+      "observed_pm25_ug_m3": 21.9,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-27T22:00:00Z",
+      "observed_pm25_ug_m3": 37.2,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-27T23:00:00Z",
+      "observed_pm25_ug_m3": 14.1,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-27T23:00:00Z",
+      "observed_pm25_ug_m3": 70.4,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-27T23:00:00Z",
+      "observed_pm25_ug_m3": 25.4,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-27T23:00:00Z",
+      "observed_pm25_ug_m3": 17.2,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-27T23:00:00Z",
+      "observed_pm25_ug_m3": 38.3,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-28T00:00:00Z",
+      "observed_pm25_ug_m3": 14.7,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-28T00:00:00Z",
+      "observed_pm25_ug_m3": 48.4,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-28T00:00:00Z",
+      "observed_pm25_ug_m3": 27.1,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-28T00:00:00Z",
+      "observed_pm25_ug_m3": 16.7,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-28T00:00:00Z",
+      "observed_pm25_ug_m3": 41.3,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-28T01:00:00Z",
+      "observed_pm25_ug_m3": 15.2,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-28T01:00:00Z",
+      "observed_pm25_ug_m3": 39.1,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-28T01:00:00Z",
+      "observed_pm25_ug_m3": 27.0,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-28T01:00:00Z",
+      "observed_pm25_ug_m3": 4.1,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-28T01:00:00Z",
+      "observed_pm25_ug_m3": 41.2,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-28T02:00:00Z",
+      "observed_pm25_ug_m3": 15.6,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-28T02:00:00Z",
+      "observed_pm25_ug_m3": 47.5,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-28T02:00:00Z",
+      "observed_pm25_ug_m3": 23.7,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-28T02:00:00Z",
+      "observed_pm25_ug_m3": 3.5,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-28T02:00:00Z",
+      "observed_pm25_ug_m3": 38.6,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-28T03:00:00Z",
+      "observed_pm25_ug_m3": 16.3,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-28T03:00:00Z",
+      "observed_pm25_ug_m3": 81.2,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-28T03:00:00Z",
+      "observed_pm25_ug_m3": 23.8,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-28T03:00:00Z",
+      "observed_pm25_ug_m3": 0.7,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-28T03:00:00Z",
+      "observed_pm25_ug_m3": 37.0,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "yangon_airgradient_14198580",
+      "sensor_id": 14198580,
+      "target_time_utc": "2026-10-28T02:30:00Z",
+      "observed_pm25_ug_m3": 32.8,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-28T04:00:00Z",
+      "observed_pm25_ug_m3": 17.0,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-28T04:00:00Z",
+      "observed_pm25_ug_m3": 98.3,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-28T04:00:00Z",
+      "observed_pm25_ug_m3": 25.1,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-28T04:00:00Z",
+      "observed_pm25_ug_m3": 0.0,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-28T04:00:00Z",
+      "observed_pm25_ug_m3": 36.2,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "yangon_airgradient_14198580",
+      "sensor_id": 14198580,
+      "target_time_utc": "2026-10-28T03:30:00Z",
+      "observed_pm25_ug_m3": 28.6,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-28T05:00:00Z",
+      "observed_pm25_ug_m3": 17.5,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-28T05:00:00Z",
+      "observed_pm25_ug_m3": 89.3,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-28T05:00:00Z",
+      "observed_pm25_ug_m3": 23.8,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-28T05:00:00Z",
+      "observed_pm25_ug_m3": 0.2,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-28T05:00:00Z",
+      "observed_pm25_ug_m3": 33.5,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "yangon_airgradient_14198580",
+      "sensor_id": 14198580,
+      "target_time_utc": "2026-10-28T04:30:00Z",
+      "observed_pm25_ug_m3": 22.7,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-28T06:00:00Z",
+      "observed_pm25_ug_m3": 17.6,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-28T06:00:00Z",
+      "observed_pm25_ug_m3": 71.0,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-28T06:00:00Z",
+      "observed_pm25_ug_m3": 22.4,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-28T06:00:00Z",
+      "observed_pm25_ug_m3": 0.4,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-28T06:00:00Z",
+      "observed_pm25_ug_m3": 33.1,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "yangon_airgradient_14198580",
+      "sensor_id": 14198580,
+      "target_time_utc": "2026-10-28T05:30:00Z",
+      "observed_pm25_ug_m3": 20.1,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-28T07:00:00Z",
+      "observed_pm25_ug_m3": 17.4,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-28T07:00:00Z",
+      "observed_pm25_ug_m3": 48.8,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-28T07:00:00Z",
+      "observed_pm25_ug_m3": 20.7,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-28T07:00:00Z",
+      "observed_pm25_ug_m3": 2.7,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-28T07:00:00Z",
+      "observed_pm25_ug_m3": 33.4,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "yangon_airgradient_14198580",
+      "sensor_id": 14198580,
+      "target_time_utc": "2026-10-28T06:30:00Z",
+      "observed_pm25_ug_m3": 21.5,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-28T08:00:00Z",
+      "observed_pm25_ug_m3": 17.3,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-28T08:00:00Z",
+      "observed_pm25_ug_m3": 35.5,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-28T08:00:00Z",
+      "observed_pm25_ug_m3": 15.7,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-28T08:00:00Z",
+      "observed_pm25_ug_m3": 5.3,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-28T08:00:00Z",
+      "observed_pm25_ug_m3": 33.5,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "yangon_airgradient_14198580",
+      "sensor_id": 14198580,
+      "target_time_utc": "2026-10-28T07:30:00Z",
+      "observed_pm25_ug_m3": 23.5,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-28T09:00:00Z",
+      "observed_pm25_ug_m3": 17.2,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-28T09:00:00Z",
+      "observed_pm25_ug_m3": 30.1,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-28T09:00:00Z",
+      "observed_pm25_ug_m3": 14.9,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-28T09:00:00Z",
+      "observed_pm25_ug_m3": 4.0,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-28T09:00:00Z",
+      "observed_pm25_ug_m3": 33.5,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "yangon_airgradient_14198580",
+      "sensor_id": 14198580,
+      "target_time_utc": "2026-10-28T08:30:00Z",
+      "observed_pm25_ug_m3": 23.7,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-28T10:00:00Z",
+      "observed_pm25_ug_m3": 17.0,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-28T10:00:00Z",
+      "observed_pm25_ug_m3": 30.8,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-28T10:00:00Z",
+      "observed_pm25_ug_m3": 14.9,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-28T10:00:00Z",
+      "observed_pm25_ug_m3": 5.6,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-28T10:00:00Z",
+      "observed_pm25_ug_m3": 34.1,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "yangon_airgradient_14198580",
+      "sensor_id": 14198580,
+      "target_time_utc": "2026-10-28T09:30:00Z",
+      "observed_pm25_ug_m3": 27.0,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-28T11:00:00Z",
+      "observed_pm25_ug_m3": 16.8,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-28T11:00:00Z",
+      "observed_pm25_ug_m3": 42.8,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-28T11:00:00Z",
+      "observed_pm25_ug_m3": 17.9,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-28T11:00:00Z",
+      "observed_pm25_ug_m3": 8.6,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-28T11:00:00Z",
+      "observed_pm25_ug_m3": 42.7,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "yangon_airgradient_14198580",
+      "sensor_id": 14198580,
+      "target_time_utc": "2026-10-28T10:30:00Z",
+      "observed_pm25_ug_m3": 27.1,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-28T12:00:00Z",
+      "observed_pm25_ug_m3": 16.8,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-28T12:00:00Z",
+      "observed_pm25_ug_m3": 38.5,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-28T12:00:00Z",
+      "observed_pm25_ug_m3": 18.7,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-28T12:00:00Z",
+      "observed_pm25_ug_m3": 10.4,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-28T12:00:00Z",
+      "observed_pm25_ug_m3": 48.3,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "yangon_airgradient_14198580",
+      "sensor_id": 14198580,
+      "target_time_utc": "2026-10-28T11:30:00Z",
+      "observed_pm25_ug_m3": 28.1,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-28T13:00:00Z",
+      "observed_pm25_ug_m3": 17.2,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-28T13:00:00Z",
+      "observed_pm25_ug_m3": 31.3,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-28T13:00:00Z",
+      "observed_pm25_ug_m3": 24.0,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-28T13:00:00Z",
+      "observed_pm25_ug_m3": 9.9,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-28T13:00:00Z",
+      "observed_pm25_ug_m3": 32.9,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "yangon_airgradient_14198580",
+      "sensor_id": 14198580,
+      "target_time_utc": "2026-10-28T12:30:00Z",
+      "observed_pm25_ug_m3": 33.2,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-28T14:00:00Z",
+      "observed_pm25_ug_m3": 17.3,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-28T14:00:00Z",
+      "observed_pm25_ug_m3": 39.7,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-28T14:00:00Z",
+      "observed_pm25_ug_m3": 28.6,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-28T14:00:00Z",
+      "observed_pm25_ug_m3": 7.5,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-28T14:00:00Z",
+      "observed_pm25_ug_m3": 23.1,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "yangon_airgradient_14198580",
+      "sensor_id": 14198580,
+      "target_time_utc": "2026-10-28T13:30:00Z",
+      "observed_pm25_ug_m3": 39.1,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-28T15:00:00Z",
+      "observed_pm25_ug_m3": 17.3,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-28T15:00:00Z",
+      "observed_pm25_ug_m3": 76.9,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-28T15:00:00Z",
+      "observed_pm25_ug_m3": 29.7,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-28T15:00:00Z",
+      "observed_pm25_ug_m3": 10.9,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-28T15:00:00Z",
+      "observed_pm25_ug_m3": 14.2,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "yangon_airgradient_14198580",
+      "sensor_id": 14198580,
+      "target_time_utc": "2026-10-28T14:30:00Z",
+      "observed_pm25_ug_m3": 32.7,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "bangkok_1304207",
+      "sensor_id": 1304207,
+      "target_time_utc": "2026-10-28T16:00:00Z",
+      "observed_pm25_ug_m3": 17.8,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hanoi_bach_mai_13502154",
+      "sensor_id": 13502154,
+      "target_time_utc": "2026-10-28T16:00:00Z",
+      "observed_pm25_ug_m3": 87.8,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "hcmc_cmt8_11357424",
+      "sensor_id": 11357424,
+      "target_time_utc": "2026-10-28T16:00:00Z",
+      "observed_pm25_ug_m3": 27.8,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "kuala_lumpur_setia_12178404",
+      "sensor_id": 12178404,
+      "target_time_utc": "2026-10-28T16:00:00Z",
+      "observed_pm25_ug_m3": 13.1,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "vientiane_unicef_12714979",
+      "sensor_id": 12714979,
+      "target_time_utc": "2026-10-28T16:00:00Z",
+      "observed_pm25_ug_m3": 13.9,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "yangon_airgradient_14198580",
+      "sensor_id": 14198580,
+      "target_time_utc": "2026-10-28T15:30:00Z",
+      "observed_pm25_ug_m3": 34.7,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    },
+    {
+      "campaign_id": "deployment-shadow-v1",
+      "station_key": "yangon_airgradient_14198580",
+      "sensor_id": 14198580,
+      "target_time_utc": "2026-10-28T16:30:00Z",
+      "observed_pm25_ug_m3": 30.8,
+      "retrieved_at_utc": "2026-10-29T04:44:07.745222Z",
+      "match_method": "exact_interval_end_utc"
+    }
+  ]
+}

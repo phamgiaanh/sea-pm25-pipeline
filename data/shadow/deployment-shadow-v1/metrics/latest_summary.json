@@ -30,15 +30,15 @@
       "model_run": "persistence"
     }
   ],
-  "generated_at_utc": "2026-10-28T04:44:10.604975Z",
-  "runs_considered": 133,
-  "forecasts_considered": 72460,
-  "station_attempts": 3186,
-  "station_successes": 3184,
-  "issuance_arm_coverage": 0.9993722536095417,
-  "evaluated": 59664,
-  "pending": 12796,
-  "unmatched_after_grace": 0,
+  "generated_at_utc": "2026-10-29T04:44:07.745222Z",
+  "runs_considered": 157,
+  "forecasts_considered": 83612,
+  "station_attempts": 3690,
+  "station_successes": 3664,
+  "issuance_arm_coverage": 0.9929539295392954,
+  "evaluated": 71692,
+  "pending": 11480,
+  "unmatched_after_grace": 440,
   "scoring_grace_hours": 12,
   "ground_truth_source": "exact OpenAQ sensor one-hour interval-end match; no interpolation",
   "independence_note": "Hourly issues overlap; individual forecast errors are not independent samples.",
@@ -46,50 +46,50 @@
     {
       "station_key": "bangkok_1304207",
       "sensor_id": 1304207,
-      "sha256": "364a14d2d38df726f15acf1a63783694abb5c3dff2f4d1cc70450223b3725372",
-      "valid_truth_rows": 121,
-      "path": "runtime/shadow_evidence/score_20261028T044410Z/bangkok_1304207/openaq_truth.json"
+      "sha256": "cc8ea07d2c1c9f3458c07db8e3b01b74bdb66adb8c6496914028c0d56f31cb2d",
+      "valid_truth_rows": 145,
+      "path": "runtime/shadow_evidence/score_20261029T044407Z/bangkok_1304207/openaq_truth.json"
     },
     {
       "station_key": "hanoi_bach_mai_13502154",
       "sensor_id": 13502154,
-      "sha256": "273551ef541f420601fbaef3b0ce37b3217286f995660f491c3671ef603d033c",
-      "valid_truth_rows": 121,
-      "path": "runtime/shadow_evidence/score_20261028T044410Z/hanoi_bach_mai_13502154/openaq_truth.json"
+      "sha256": "f5c1048f6a2f4d01edbdfeabf45afffff1d7fea476a050e687938eeab044c690",
+      "valid_truth_rows": 145,
+      "path": "runtime/shadow_evidence/score_20261029T044407Z/hanoi_bach_mai_13502154/openaq_truth.json"
     },
     {
       "station_key": "hcmc_cmt8_11357424",
       "sensor_id": 11357424,
-      "sha256": "87b9a54d1cbe5275a76a21bae7793a206fe0d8ea166721c43d83cd1be8fd468d",
-      "valid_truth_rows": 121,
-      "path": "runtime/shadow_evidence/score_20261028T044410Z/hcmc_cmt8_11357424/openaq_truth.json"
+      "sha256": "7f19c797a57694b062f1f803e457a119a780f9386ed9457b4f169c9d341055c5",
+      "valid_truth_rows": 145,
+      "path": "runtime/shadow_evidence/score_20261029T044407Z/hcmc_cmt8_11357424/openaq_truth.json"
     },
     {
       "station_key": "kuala_lumpur_setia_12178404",
       "sensor_id": 12178404,
-      "sha256": "635c3b9235fe920078938ee4dd6ab67ccbf43f256b24b64b0e7915f11d500c7e",
-      "valid_truth_rows": 121,
-      "path": "runtime/shadow_evidence/score_20261028T044410Z/kuala_lumpur_setia_12178404/openaq_truth.json"
+      "sha256": "cc9258311915831ded5572d8efc1e3f8bf97ef0f378cadf7896e07fe0142d477",
+      "valid_truth_rows": 145,
+      "path": "runtime/shadow_evidence/score_20261029T044407Z/kuala_lumpur_setia_12178404/openaq_truth.json"
     },
     {
       "station_key": "vientiane_unicef_12714979",
       "sensor_id": 12714979,
-      "sha256": "db2bca069228eb31dedc62c498b5923765c7cfe7098d037092038847bb903dbe",
-      "valid_truth_rows": 121,
-      "path": "runtime/shadow_evidence/score_20261028T044410Z/vientiane_unicef_12714979/openaq_truth.json"
+      "sha256": "2e91a47438de436f01ab50be509c075e01cef31f67f46247df2370e1032171f6",
+      "valid_truth_rows": 145,
+      "path": "runtime/shadow_evidence/score_20261029T044407Z/vientiane_unicef_12714979/openaq_truth.json"
     },
     {
       "station_key": "yangon_airgradient_14198580",
       "sensor_id": 14198580,
-      "sha256": "4426bfea29776d5b38c3b451222e8a3c50d6155a46dd303f881290e726e1450f",
-      "valid_truth_rows": 121,
-      "path": "runtime/shadow_evidence/score_20261028T044410Z/yangon_airgradient_14198580/openaq_truth.json"
+      "sha256": "98db5871c35fd8e3b01ab24edafa793bf7bcf8770c6570a72c90aebf5770c18c",
+      "valid_truth_rows": 140,
+      "path": "runtime/shadow_evidence/score_20261029T044407Z/yangon_airgradient_14198580/openaq_truth.json"
     }
   ],
   "fetch_errors": {},
   "outputs": {
-    "latest_by_model.csv": "249f055eeb47db12afdf30aeb0decb6ec260560124438461294a3197df0954fd",
-    "latest_by_station.csv": "20ba75e96e3a3d385221cdf25130347f509d291b4f6bb78c7f8d26d4054dcca7",
-    "latest_by_station_horizon.csv": "88253ec4f723f3c2327e5fc90213be173c7f7d29b0ac0ebd048c63f55f594e26"
+    "latest_by_model.csv": "5183aa578eafcffb156c9e24c20aa300b87ad2f4910a21034ec4c538c7c6cc7e",
+    "latest_by_station.csv": "13c162df703168070006f4ae54e72781aed0e6cd6144333f578596e6646c5c78",
+    "latest_by_station_horizon.csv": "d958c5a82b600bbf2e4f07dc1c8653d02cd09798286e9d42e8c18e05cc5054c0"
   }
 }
