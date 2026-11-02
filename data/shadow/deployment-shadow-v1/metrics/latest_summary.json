@@ -30,7 +30,7 @@
       "model_run": "persistence"
     }
   ],
-  "generated_at_utc": "2026-11-01T04:44:08.812880Z",
+  "generated_at_utc": "2026-11-02T04:44:07.123633Z",
   "runs_considered": 169,
   "forecasts_considered": 90248,
   "station_attempts": 3978,
@@ -48,42 +48,42 @@
       "sensor_id": 1304207,
       "sha256": "87857c89fd65df2edc898881c23e087f2b0e16f2729db052d918fdc03e3bdc7c",
       "valid_truth_rows": 192,
-      "path": "runtime/shadow_evidence/score_20261101T044408Z/bangkok_1304207/openaq_truth.json"
+      "path": "runtime/shadow_evidence/score_20261102T044407Z/bangkok_1304207/openaq_truth.json"
     },
     {
       "station_key": "hanoi_bach_mai_13502154",
       "sensor_id": 13502154,
       "sha256": "6487a4d7df98d054aff68d38ea58c847a4f515420ac1bff9be6db4d0d86efba4",
       "valid_truth_rows": 192,
-      "path": "runtime/shadow_evidence/score_20261101T044408Z/hanoi_bach_mai_13502154/openaq_truth.json"
+      "path": "runtime/shadow_evidence/score_20261102T044407Z/hanoi_bach_mai_13502154/openaq_truth.json"
     },
     {
       "station_key": "hcmc_cmt8_11357424",
       "sensor_id": 11357424,
       "sha256": "5b117f8d2ba56cb4e63298dada9c5ad93c56201ca535170e5a0df241f01a5d79",
       "valid_truth_rows": 193,
-      "path": "runtime/shadow_evidence/score_20261101T044408Z/hcmc_cmt8_11357424/openaq_truth.json"
+      "path": "runtime/shadow_evidence/score_20261102T044407Z/hcmc_cmt8_11357424/openaq_truth.json"
     },
     {
       "station_key": "kuala_lumpur_setia_12178404",
       "sensor_id": 12178404,
       "sha256": "f592c676593bfb5be44bc490e824f233defe1f7a33fabd6a02459c61a6b2f1fd",
       "valid_truth_rows": 193,
-      "path": "runtime/shadow_evidence/score_20261101T044408Z/kuala_lumpur_setia_12178404/openaq_truth.json"
+      "path": "runtime/shadow_evidence/score_20261102T044407Z/kuala_lumpur_setia_12178404/openaq_truth.json"
     },
     {
       "station_key": "vientiane_unicef_12714979",
       "sensor_id": 12714979,
       "sha256": "11cdf9f1e959218279a8aca71b0f53dbb6542f8937a528c69a0f384caeac5e46",
       "valid_truth_rows": 193,
-      "path": "runtime/shadow_evidence/score_20261101T044408Z/vientiane_unicef_12714979/openaq_truth.json"
+      "path": "runtime/shadow_evidence/score_20261102T044407Z/vientiane_unicef_12714979/openaq_truth.json"
     },
     {
       "station_key": "yangon_airgradient_14198580",
       "sensor_id": 14198580,
       "sha256": "9a5c68efda5cd340efc40fc9787211c71b15511f61013d2e237d5688f23bd35e",
       "valid_truth_rows": 187,
-      "path": "runtime/shadow_evidence/score_20261101T044408Z/yangon_airgradient_14198580/openaq_truth.json"
+      "path": "runtime/shadow_evidence/score_20261102T044407Z/yangon_airgradient_14198580/openaq_truth.json"
     }
   ],
   "fetch_errors": {},
